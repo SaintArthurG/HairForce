@@ -1,11 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaUser, FaLock } from 'react-icons/fa'
 import { useState } from 'react'
+
+import axios from "axios";
+
 import "./Login.css"
 
 const Login = () => {
     const [formData, setFormData] = useState({ login: "", password: "" });
     const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -33,9 +37,18 @@ const Login = () => {
             return;
         }
 
-        console.log("Enviando login:", formData);
-        console.log("testando commit");
+        axios
+            .post("http://localhost:8080/api/login", formData)// URL do backend (ajuste conforme necessário)
+            .then((response) => {
+                console.log("Login bem-sucedido", response.data);
+                navigate("/dashboard");
+            })
+            .catch((err) => {
+                setError("Erro ao realizar login. Tente novamente.");
+                console.error("Erro:", err);
+            });
     };
+
     return (
         <div className='container'>
             <form onSubmit={handleSubmit}>

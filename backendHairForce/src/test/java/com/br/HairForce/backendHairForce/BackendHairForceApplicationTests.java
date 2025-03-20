@@ -1,4 +1,4 @@
-package com.br.hairforce.backendHairForce;
+package com.br.HairForce.backendHairForce;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

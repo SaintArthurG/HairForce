@@ -1,4 +1,4 @@
-package com.br.hairforce.backendHairForce;
+package com.br.HairForce.backendHairForce;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
