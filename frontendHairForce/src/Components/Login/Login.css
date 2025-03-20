@@ -1,63 +1,146 @@
-body{
-  margin: 0px;
+/* Login.css */
+
+/* Adicionando box-sizing para garantir que o padding e a borda sejam contados no tamanho total */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 .container {
-  text-align: center;
-  width: 100vw;
-  height: 50vh;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  background-color: grey;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f4f7fc;
+  font-family: 'Arial', sans-serif;
 }
 
+h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+form {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box; /* Garantir que o padding não altere a largura do form */
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.input-container input {
+  width: 100%;
+  padding: 12px;
+  padding-left: 35px; /* espaço para o ícone */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+.input-container input:focus {
+  border-color: #4CAF50;
+  outline: none;
+  background-color: #fff;
+}
+
+.input-container .icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  font-size: 1.2rem;
+}
 
 button {
-  padding: 10px 20px;
-  width: 320px;
-  border: none;
-  border-radius: 15px;
-  background-color: #f19113;
+  width: 100%;
+  padding: 12px;
+  background-color: #4CAF50;
   color: white;
-  font-size: 16px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 15px;
 }
 
 button:hover {
-  background-color: #8f6518;
+  background-color: #45a049;
 }
 
-
-label {
-  font-size: 16px; 
-  font-weight: bold; 
-  color: #030303; 
-  align-items: center;
-  text-align: center; 
-  margin-left: -2px; 
-  background: none;
-  border: none;
-  color: #000000;
-  cursor: pointer;
-  margin-top: 20px;
+button:active {
+  background-color: #388e3c;
 }
-label:hover{
 
+.error {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.recall-forget {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+.recall-forget label {
+  color: #666;
+}
+
+.recall-forget a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+.recall-forget a:hover {
   text-decoration: underline;
 }
 
-
-input {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 16px;
+.App {
+  text-align: center;
+  margin-top: 20px;
 }
 
-  
-h1 {
-  margin-bottom: 20px;
+.App a {
+  color: #4CAF50;
+  text-decoration: none;
 }
 
+.App a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  .container {
+    padding: 20px;
+  }
+
+  form {
+    width: 100%;
+    padding: 20px;
+  }
+
+  input, button {
+    font-size: 1rem;
+    padding: 10px;
+  }
+}
