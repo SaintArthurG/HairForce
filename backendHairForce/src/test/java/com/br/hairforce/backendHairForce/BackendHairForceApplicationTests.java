@@ -1,10 +1,10 @@
-package com.br.HairForce;
+package com.br.hairforce.backendHairForce;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class HairForceApplicationTests {
+class BackendHairForceApplicationTests {
 
 	@Test
 	void contextLoads() {
