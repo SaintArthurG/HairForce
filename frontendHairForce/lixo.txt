@@ -1,0 +1,77 @@
+<input
+            type="password"
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            placeholder="Confirmar Senha"
+          />
+
+
+
+        if (password !== confirmPassword) {
+            setError("As senhas não coincidem!");
+            return;
+        }
+
+
+
+
+
+
+
+=========================================================
+package com.br.HairForce.backendHairForce.controller;
+
+import org.springframework.web.bind.annotation.*;
+
+//@RestController
+//@RequestMapping("/api")
+public class LoginController {
+
+    //@PostMapping("/login")
+    public String login(@RequestBody User user) {
+        // Aqui você pode adicionar sua lógica de autenticação, mas vamos apenas responder com um sucesso
+        System.out.println("Login recebido: " + user.getUsername() + ", " + user.getPassword());
+        return "Login bem-sucedido!";
+    }
+
+    public static class User {
+        private String username;
+        private String password;
+
+        // Getters and setters
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+    }
+}
+
+
+
+created(URI.create("/api/cadastro/" + userId.toString())).build()
+
+
+
+
+
+    @GetMapping("/{userId}")  // Correct the path variable to match the method parameter
+    public ResponseEntity<User> getUserById(@PathVariable("userId") String userId){
+        // You need to implement the service call and return a user
+        User user = userService.getUserById(UUID.fromString(userId));
+        if (user == null) {
+            return ResponseEntity.notFound().build();  // Return 404 if user not found
+        }
+        return ResponseEntity.ok(user);
+    }

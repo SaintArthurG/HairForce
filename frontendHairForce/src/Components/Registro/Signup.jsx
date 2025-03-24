@@ -1,96 +1,96 @@
-import { Link } from "react-router-dom";
-import { FaUser, FaLock, FaEnvelope } from "react-icons/fa";
 import { useState } from "react";
-import "./Signup.css"
-
+import "./Signup.css";
+import axios from "axios";
 
 const Signup = () => {
-    const [formData, setFormData] = useState({
-        name: "",
-        login: "",
-        password: "",
-        confirmPassword: "",
-    });
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: ""
+  });
 
-    const [error, setError] = useState("");
+  const [error, setError] = useState(""); // Para exibir erros
+  const [success, setSuccess] = useState(""); // Para exibir sucesso
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-        setError("");
-    };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError(""); // Limpar erro quando o campo é alterado
+  };
 
-    const isValidCPF = (cpf) => {
-        return /^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(cpf) || /^\d{11}$/.test(cpf);
-    };
+  const isValidEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
 
-    const isValidEmail = (email) => {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const { username, email, password } = formData;
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    // Validações
+    if (!username || !email || !password) {
+      setError("Preencha todos os campos!");
+      return;
+    }
 
-        const { name, login, password, confirmPassword } = formData;
+    if (!isValidEmail(email)) {
+      setError("Digite um e-mail válido!");
+      return;
+    }
 
-        if (!name || !login || !password || !confirmPassword) {
-            setError("Preencha todos os campos!");
-            return;
+    if (password.length < 6) {
+      setError("A senha deve ter no mínimo 6 caracteres!");
+      return;
+    }
+
+    // Envio dos dados via axios
+    axios
+      .post("http://localhost:8080/api/cadastro", formData)
+      .then((response) => {
+        console.log("Cadastro bem-sucedido", response.data);
+        setSuccess("Cadastro realizado com sucesso! Você pode agora fazer login.");
+        setFormData({ username: "", email: "", password: "" }); // Limpa os campos após sucesso
+      })
+      .catch((err) => {
+        if (err.response) {
+          console.error("Erro no cadastro:", err.response.data);
+          setError("Erro ao realizar cadastro. Tente novamente.");
+        } else {
+          console.error("Erro no servidor:", err.message);
+          setError("Erro ao se conectar ao servidor.");
         }
+      });
+  };
 
-        if (!isValidEmail(login) && !isValidCPF(login)) {
-            setError("Digite um e-mail ou CPF válido!");
-            return;
-        }
-
-        if (password.length < 6) {
-            setError("A senha deve ter no mínimo 6 caracteres!");
-            return;
-        }
-
-        if (password !== confirmPassword) {
-            setError("As senhas não coincidem!");
-            return;
-        }
-
-        console.log("Registro enviado:", formData);
-    };
-
-    return (
-        <div className="signup-container">
-        <h1>Cadastro</h1>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="Nome"
-          />
-          <input
-            type="text"
-            name="login"
-            value={formData.login}
-            onChange={handleChange}
-            placeholder="E-mail ou CPF"
-          />
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            placeholder="Senha"
-          />
-          <input
-            type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            placeholder="Confirmar Senha"
-          />
-          <button type="submit">Registrar</button>
-        </form>
-      </div>
-    );
-}
+  return (
+    <div className="signup-container">
+      <h1>Cadastro</h1>
+      {error && <div className="error">{error}</div>}
+      {success && <div className="success">{success}</div>}
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="username"
+          value={formData.username}
+          onChange={handleChange}
+          placeholder="Username"
+        />
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="Email"
+        />
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          placeholder="Password"
+        />
+        <button type="submit">Registrar</button>
+      </form>
+    </div>
+  );
+};
 
 export default Signup;

@@ -5,12 +5,13 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
+import java.util.UUID;
 
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private UUID userId;
 
     @Column(name = "username")
     private String username;
@@ -18,7 +19,7 @@ public class User {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
     @CreationTimestamp
@@ -27,11 +28,12 @@ public class User {
     @UpdateTimestamp
     private Instant updatedTimeStamp;
 
+
     public User() {
     }
 
-    public User(Integer id, String username, String email, String password, Instant creationTimeStamp, Instant updatedTimeStamp) {
-        this.id = id;
+    public User(UUID userId, String username, String email, String password, Instant creationTimeStamp, Instant updatedTimeStamp) {
+        this.userId = userId;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -39,22 +41,27 @@ public class User {
         this.updatedTimeStamp = updatedTimeStamp;
     }
 
-    public Integer getId(){
-        return id;
+    public UUID getUserId() {
+        return userId;
     }
-    public void setId(Integer id){
-        this.id = id;
+
+    public void setUserId(UUID userId) {
+        this.userId = userId;
     }
-    public String getUsername(){
+
+    public String getUsername() {
         return username;
     }
-    public void setUsername(String username){
+
+    public void setUsername(String username) {
         this.username = username;
     }
-    public String getEmail(){
+
+    public String getEmail() {
         return email;
     }
-    public void setEmail(String email){
+
+    public void setEmail(String email) {
         this.email = email;
     }
 
