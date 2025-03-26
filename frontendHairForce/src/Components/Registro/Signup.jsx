@@ -85,13 +85,6 @@ const Signup = () => {
           placeholder="Password"
         />
 
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          placeholder="Password"
-        />
 
         <button type="submit">Registrar</button>
       </form>
