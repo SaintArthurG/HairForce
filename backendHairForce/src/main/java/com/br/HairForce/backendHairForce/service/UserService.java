@@ -20,9 +20,11 @@ public class UserService {
         // DTO -> ENTITY
 
         User user = new User ();
+
         user.setUsername(createUserDto.getUsername());
         user.setEmail(createUserDto.getEmail());
         user.setPassword(createUserDto.getPassword());
+
         userRepository.save(user);
         return user.getUserId();
     }
