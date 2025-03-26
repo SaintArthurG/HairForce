@@ -1,51 +1,34 @@
 package com.br.HairForce.backendHairForce.entity;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
-import java.time.Instant;
-import java.util.UUID;
 
 @Entity
 public class User {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID userId;
-
-    @Column(name = "username")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long userId;
     private String username;
-
-    @Column(name = "email", unique = true, nullable = false)
     private String email;
-
-    @Column(name = "password", nullable = false)
     private String password;
 
-    @CreationTimestamp
-    private Instant creationTimeStamp;
-
-    @UpdateTimestamp
-    private Instant updatedTimeStamp;
+    @Version
+    private Long version;
 
 
-    public User() {
-    }
+    public User() {}
 
-    public User(UUID userId, String username, String email, String password, Instant creationTimeStamp, Instant updatedTimeStamp) {
-        this.userId = userId;
+    public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.creationTimeStamp = creationTimeStamp;
-        this.updatedTimeStamp = updatedTimeStamp;
     }
 
-    public UUID getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(UUID userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -73,19 +56,11 @@ public class User {
         this.password = password;
     }
 
-    public Instant getCreationTimeStamp() {
-        return creationTimeStamp;
+    public Long getVersion() {
+        return version;
     }
 
-    public void setCreationTimeStamp(Instant creationTimeStamp) {
-        this.creationTimeStamp = creationTimeStamp;
-    }
-
-    public Instant getUpdatedTimeStamp() {
-        return updatedTimeStamp;
-    }
-
-    public void setUpdatedTimeStamp(Instant updatedTimeStamp) {
-        this.updatedTimeStamp = updatedTimeStamp;
+    public void setVersion(Long version) {
+        this.version = version;
     }
 }

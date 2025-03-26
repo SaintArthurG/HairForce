@@ -9,12 +9,12 @@ const Signup = () => {
     password: ""
   });
 
-  const [error, setError] = useState(""); // Para exibir erros
-  const [success, setSuccess] = useState(""); // Para exibir sucesso
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setError(""); // Limpar erro quando o campo é alterado
+    setError("");
   };
 
   const isValidEmail = (email) => {
@@ -26,7 +26,7 @@ const Signup = () => {
     const { username, email, password } = formData;
 
     // Validações
-    if (!username || !email || !password) {
+    if (!username || !email) {
       setError("Preencha todos os campos!");
       return;
     }
@@ -36,14 +36,10 @@ const Signup = () => {
       return;
     }
 
-    if (password.length < 6) {
-      setError("A senha deve ter no mínimo 6 caracteres!");
-      return;
-    }
 
     // Envio dos dados via axios
     axios
-      .post("http://localhost:8080/api/cadastro", formData)
+      .post("http://localhost:8080/api/usuarios/cadastro", formData)
       .then((response) => {
         console.log("Cadastro bem-sucedido", response.data);
         setSuccess("Cadastro realizado com sucesso! Você pode agora fazer login.");
@@ -80,6 +76,7 @@ const Signup = () => {
           onChange={handleChange}
           placeholder="Email"
         />
+
         <input
           type="password"
           name="password"
@@ -87,6 +84,7 @@ const Signup = () => {
           onChange={handleChange}
           placeholder="Password"
         />
+
         <button type="submit">Registrar</button>
       </form>
     </div>
