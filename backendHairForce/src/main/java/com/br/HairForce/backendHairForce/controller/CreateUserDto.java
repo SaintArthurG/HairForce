@@ -7,7 +7,6 @@ public class CreateUserDto {
     private String email;
     private String password;
 
-    // Construtor
     public CreateUserDto(String username, String email, String password) {
         this.username = username;
         this.email = email;

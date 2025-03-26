@@ -19,14 +19,14 @@ public class UserController {
     }
 
     @PostMapping("/cadastro")
-    public ResponseEntity<Long> createUser(@RequestBody CreateUserDto createUserDto, BindingResult bindingResult) {
+    public ResponseEntity<String> createUser(@RequestBody CreateUserDto createUserDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             StringBuilder errorMessages = new StringBuilder();
             bindingResult.getAllErrors().forEach(error -> errorMessages.append(error.getDefaultMessage()).append("\n"));
-            return ResponseEntity.badRequest().body(null);  // Ou retorne detalhes do erro
+            return ResponseEntity.badRequest().body(null);
         }
-        Long userId = userService.createUser(createUserDto);
-        return ResponseEntity.ok(userId);
+        String userName = userService.createUser(createUserDto);
+        return ResponseEntity.ok(userName);
     }
 
 

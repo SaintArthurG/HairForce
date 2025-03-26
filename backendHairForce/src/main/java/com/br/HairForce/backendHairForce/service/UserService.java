@@ -16,7 +16,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public Long createUser(CreateUserDto createUserDto){
+    public String createUser(CreateUserDto createUserDto){
         // DTO -> ENTITY
 
         User user = new User ();
@@ -26,7 +26,7 @@ public class UserService {
         user.setPassword(createUserDto.getPassword());
 
         userRepository.save(user);
-        return user.getUserId();
+        return user.getUsername();
     }
 
 }

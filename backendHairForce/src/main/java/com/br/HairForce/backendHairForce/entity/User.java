@@ -31,15 +31,6 @@ public class User {
     @Version
     private Long version;
 
-//
-//
-//    private String username;
-//    private String email;
-//    private String password;
-
-
-
-
     public User() {}
 
     public User(Long userId, String username, String email, String password, Instant creationTimeStamp, Instant updatedTimeStamp, Long version) {
