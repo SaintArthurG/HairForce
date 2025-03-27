@@ -13,7 +13,6 @@ public class CreateUserDto {
         this.password = password;
     }
 
-    // Getters e Setters
     public String getUsername() {
         return username;
     }
