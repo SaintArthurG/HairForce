@@ -29,7 +29,6 @@ public class UserController {
         return ResponseEntity.ok(userName);
     }
 
-
     @GetMapping("/")
     public String msg (){
         return "ok";
