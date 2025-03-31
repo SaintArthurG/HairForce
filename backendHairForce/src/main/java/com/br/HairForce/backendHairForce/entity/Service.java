@@ -12,6 +12,7 @@ public class Service {
     private Long id;
 
     private String name;
+
     private Double price;
 
     public Service() {}

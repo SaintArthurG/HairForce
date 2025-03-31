@@ -13,12 +13,10 @@ import java.time.LocalDateTime;
 public class BarberService {
     private final BarberRepository barberRepository;
 
-    private final ScheduleService scheduleService;
 
     @Autowired
-    public BarberService(BarberRepository barberRepository, ScheduleService scheduleService) {
+    public BarberService(BarberRepository barberRepository) {
         this.barberRepository = barberRepository;
-        this.scheduleService = scheduleService;
     }
 
 
@@ -30,7 +28,4 @@ public class BarberService {
         return barberRepository.findById(id).orElse(null);
     }
 
-    public Schedule scheduleServiceForBarber(Long barberId, String serviceType, LocalDateTime serviceTime) {
-        return scheduleService.createSchedule(barberId, serviceType, serviceTime);
-    }
 }

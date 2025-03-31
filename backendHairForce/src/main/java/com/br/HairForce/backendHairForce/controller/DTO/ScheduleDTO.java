@@ -1,12 +1,14 @@
 package com.br.HairForce.backendHairForce.controller.DTO;
 
+import com.br.HairForce.backendHairForce.entity.Service;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class ScheduleDTO {
     private Long barberId;
-    private LocalDateTime time;
-    private List<String> services;
+    private String time;
+    private List<Service> services;
 
     public Long getBarberId() {
         return barberId;
@@ -16,19 +18,19 @@ public class ScheduleDTO {
         this.barberId = barberId;
     }
 
-    public LocalDateTime getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
-    public List<String> getServices() {
+    public List<Service> getServices() {
         return services;
     }
 
-    public void setServices(List<String> services) {
+    public void setServices(List<Service> services) {
         this.services = services;
     }
 }
