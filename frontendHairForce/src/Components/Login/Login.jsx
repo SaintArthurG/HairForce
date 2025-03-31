@@ -7,7 +7,7 @@ import axios from "axios";
 import "./Login.css"
 
 const Login = () => {
-    const [formData, setFormData] = useState({ login: "", password: "" });
+    const [formData, setFormData] = useState({ email: "", password: "" });
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
@@ -27,24 +27,30 @@ const Login = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (!formData.login || !formData.password) {
+        if (!formData.email || !formData.password) {
             setError("Preencha todos os campos!");
             return;
         }
 
-        if (!isValidEmail(formData.login) && !isValidCPF(formData.login)) {
+        if (!isValidEmail(formData.email) && !isValidCPF(formData.email)) {
             setError("Digite um e-mail ou CPF válido!");
             return;
         }
 
         axios
-            .post("http://localhost:8080/api/login", formData)// URL do backend (ajuste conforme necessário)
+            .post("http://localhost:8080/login", formData)
             .then((response) => {
                 console.log("Login bem-sucedido", response.data);
                 navigate("/dashboard");
             })
             .catch((err) => {
-                setError("Erro ao realizar login. Tente novamente.");
+                if (err.response) {
+                    setError(err.response.data.message || "Erro ao realizar login. Tente novamente.");
+                } else if (err.request) {
+                    setError("Não foi possível se conectar ao servidor. Tente novamente mais tarde.");
+                } else {
+                    setError("Erro ao realizar a requisição.");
+                }
                 console.error("Erro:", err);
             });
     };
@@ -57,10 +63,10 @@ const Login = () => {
                 <div className="input-container">
                     <input
                         type="text"
-                        name="login"
-                        placeholder="E-mail ou CPF"
+                        name="email"
+                        placeholder="E-mail"
                         onChange={handleChange}
-                        value={formData.login}
+                        value={formData.email}
                     />
                     <FaUser className="icon" />
                 </div>
@@ -85,7 +91,7 @@ const Login = () => {
                     <a href="/forgot-password">Esqueceu a senha?</a>
                 </div>
 
-                <button disabled={!formData.login || !formData.password}>
+                <button disabled={!formData.email || !formData.password}>
                     Entrar
                 </button>
 

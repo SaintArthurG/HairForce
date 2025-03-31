@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/api/usuarios")
+@RequestMapping("/user")
 public class UserController {
 
     private UserService userService;
@@ -23,7 +23,7 @@ public class UserController {
         return ResponseEntity.ok(userName);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public String msg (){
         return "ok";
     }
