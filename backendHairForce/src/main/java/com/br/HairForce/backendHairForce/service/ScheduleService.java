@@ -15,27 +15,34 @@ import java.util.List;
 @Service
 public class ScheduleService {
 
-    private BarberService barberService;
+    private final BarberService barberService;
 
-    private ScheduleRepository scheduleRepository;
-
-    private ServiceRepository serviceRepository;
+    private final ScheduleRepository scheduleRepository;
 
     @Autowired
-    public ScheduleService(BarberService barberService, ScheduleRepository scheduleRepository, ServiceRepository serviceRepository) {
+    public ScheduleService(BarberService barberService, ScheduleRepository scheduleRepository) {
         this.barberService = barberService;
         this.scheduleRepository = scheduleRepository;
-        this.serviceRepository = serviceRepository;
     }
 
     public boolean isTimeAvailable(Long barberId, LocalDateTime time) {
         return !scheduleRepository.existsByBarberIdAndTime(barberId, time);
     }
 
-//    public List<Schedule> getScheduleByBarber(Long barberId){
-//        return scheduleRepository.findByBarberId(barberId);
-//    }
+    public List<Schedule> getScheduleByBarber(Long barberId){
+        return scheduleRepository.findByBarberId(barberId);
+    }
 
+    public List<Schedule> getAllSchedules(){
+        return scheduleRepository.findAll();
+    }
+
+    public List<Schedule> getActiveSchedules(){
+        return scheduleRepository.findByExpiredFalse();
+    }
+
+
+    //adicionando novo horario e vinculando ao barber
     public Schedule saveSchedule(ScheduleDTO scheduleDTO){
         Barber barber = barberService.getBarberById(scheduleDTO.getBarberId());
         if(barber == null){
@@ -59,4 +66,6 @@ public class ScheduleService {
 
         return scheduleRepository.save(schedule);
     }
+
+
 }

@@ -12,4 +12,8 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
     List<Schedule> findByBarberId(Long barberId);
 
     boolean existsByBarberIdAndTime(Long barberId, LocalDateTime time);
+
+    List<Schedule> findByTimeBeforeAndExpiredFalse(LocalDateTime time);
+
+    List<Schedule> findByExpiredFalse();
 }

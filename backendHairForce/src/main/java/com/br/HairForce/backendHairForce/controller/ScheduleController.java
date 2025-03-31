@@ -30,8 +30,16 @@ public class ScheduleController {
         }
     }
 
-    @GetMapping("/barber/{barberId}/")
-    public List<Schedule> getSchedulesByBarber(@PathVariable Long barberId) {
-        return scheduleRepository.findByBarberId(barberId);
+    @GetMapping("/active")
+    public ResponseEntity<List<Schedule>> getActiveSchedules(){
+        List<Schedule> activeSchedules = scheduleService.getActiveSchedules();
+        return ResponseEntity.ok(activeSchedules);
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Schedule>> getAllSchedules(){
+        List<Schedule> allSchedules = scheduleService.getAllSchedules();
+        return ResponseEntity.ok(allSchedules);
+    }
+
 }

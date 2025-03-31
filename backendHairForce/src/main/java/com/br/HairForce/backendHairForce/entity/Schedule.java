@@ -27,14 +27,25 @@ public class Schedule {
             inverseJoinColumns = @JoinColumn(name = "service_id"))
     private List<Service> services;
 
+    private boolean expired = false;
+
     public Schedule () {}
 
-    public Schedule(Long id, Barber barber, LocalDateTime time, Timestamp timestamp, List<Service> services) {
+    public Schedule(Long id, Barber barber, LocalDateTime time, Timestamp timestamp, List<Service> services, boolean expired) {
         this.id = id;
         this.barber = barber;
         this.time = time;
         this.timestamp = timestamp;
         this.services = services;
+        this.expired = expired;
+    }
+
+    public boolean isExpired() {
+        return expired;
+    }
+
+    public void setExpired(boolean expired) {
+        this.expired = expired;
     }
 
     public Long getId() {
