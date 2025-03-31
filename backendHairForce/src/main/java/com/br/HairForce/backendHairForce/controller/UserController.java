@@ -1,9 +1,8 @@
 package com.br.HairForce.backendHairForce.controller;
 
-import com.br.HairForce.backendHairForce.entity.User;
+import com.br.HairForce.backendHairForce.controller.DTO.CreateUserDTO;
 import com.br.HairForce.backendHairForce.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -18,7 +17,7 @@ public class UserController {
     }
 
     @PostMapping("/cadastro")
-    public ResponseEntity<String> createUser(@RequestBody CreateUserDto createUserDto) {
+    public ResponseEntity<String> createUser(@RequestBody CreateUserDTO createUserDto) {
         String userName = userService.createUser(createUserDto);
         return ResponseEntity.ok(userName);
     }

@@ -1,6 +1,6 @@
-package com.br.HairForce.backendHairForce.controller;
+package com.br.HairForce.backendHairForce.controller.DTO;
 
-public class LoginDto {
+public class LoginDTO {
     private String email;
     private String password;
 

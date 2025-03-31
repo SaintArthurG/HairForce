@@ -1,13 +1,13 @@
-package com.br.HairForce.backendHairForce.controller;
+package com.br.HairForce.backendHairForce.controller.DTO;
 
 
-public class CreateUserDto {
+public class CreateUserDTO {
 
     private String username;
     private String email;
     private String password;
 
-    public CreateUserDto(String username, String email, String password) {
+    public CreateUserDTO(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;

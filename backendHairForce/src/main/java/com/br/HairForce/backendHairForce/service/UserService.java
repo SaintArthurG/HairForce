@@ -1,6 +1,6 @@
 package com.br.HairForce.backendHairForce.service;
 
-import com.br.HairForce.backendHairForce.controller.CreateUserDto;
+import com.br.HairForce.backendHairForce.controller.DTO.CreateUserDTO;
 import com.br.HairForce.backendHairForce.entity.User;
 import com.br.HairForce.backendHairForce.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public String createUser(CreateUserDto createUserDto){
+    public String createUser(CreateUserDTO createUserDto){
         // DTO -> ENTITY
 
         User user = new User ();
