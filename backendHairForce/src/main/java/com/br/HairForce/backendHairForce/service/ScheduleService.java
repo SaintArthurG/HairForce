@@ -28,6 +28,10 @@ public class ScheduleService {
         this.serviceRepository = serviceRepository;
     }
 
+    public boolean isTimeAvailable(Long barberId, LocalDateTime time) {
+        return !scheduleRepository.existsByBarberIdAndTime(barberId, time);
+    }
+
 //    public List<Schedule> getScheduleByBarber(Long barberId){
 //        return scheduleRepository.findByBarberId(barberId);
 //    }
@@ -39,6 +43,10 @@ public class ScheduleService {
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         LocalDateTime scheduleTime = LocalDateTime.parse(scheduleDTO.getTime(), formatter);
+
+        if(!isTimeAvailable(scheduleDTO.getBarberId(), scheduleTime)){
+            throw new RuntimeException("Horário indisponível.");
+        }
 
         if (scheduleDTO.getServices().isEmpty()){
             throw new IllegalArgumentException("Serviços não encontrados");
