@@ -26,6 +26,7 @@ public class ScheduleService {
     }
 
     public boolean isTimeAvailable(Long barberId, LocalDateTime time) {
+        System.out.println("Verificando disponibilidade: Barbeiro ID = " + barberId + ", Hora = " + time);
         return !scheduleRepository.existsByBarberIdAndTime(barberId, time);
     }
 
@@ -48,10 +49,8 @@ public class ScheduleService {
         if(barber == null){
             throw new IllegalArgumentException("Barbeiro nao encontrado");
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalDateTime scheduleTime = LocalDateTime.parse(scheduleDTO.getTime(), formatter);
 
-        if(!isTimeAvailable(scheduleDTO.getBarberId(), scheduleTime)){
+        if(!isTimeAvailable(scheduleDTO.getBarberId(), scheduleDTO.getTime())){
             throw new RuntimeException("Horário indisponível.");
         }
 
@@ -61,7 +60,8 @@ public class ScheduleService {
 
         Schedule schedule = new Schedule();
         schedule.setBarber(barber);
-        schedule.setTime(scheduleTime);
+        schedule.setTime(scheduleDTO.getTime());
+
         schedule.setServices(scheduleDTO.getServices());
 
         return scheduleRepository.save(schedule);

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ScheduleDTO {
     private Long barberId;
-    private String time;
+    private LocalDateTime time;
     private List<Service> services;
 
     public Long getBarberId() {
@@ -18,11 +18,11 @@ public class ScheduleDTO {
         this.barberId = barberId;
     }
 
-    public String getTime() {
+    public LocalDateTime getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(LocalDateTime time) {
         this.time = time;
     }
 

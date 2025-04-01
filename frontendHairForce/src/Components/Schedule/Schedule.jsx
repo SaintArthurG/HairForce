@@ -1,10 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 const Schedule = () => {
     const [barberId, setBarberId] = useState("");
     const [time, setTime] = useState("");
     const [services, setServices] = useState([]);
+    const [barbers, setBarbers] = useState([]); // Estado para armazenar os barbeiros
+
+    useEffect(() => {
+        // Função para buscar barbeiros do backend
+        const fetchBarbers = async () => {
+            try {
+                const response = await axios.get("http://localhost:8080/barbers");
+                setBarbers(response.data); // Atualiza o estado com os barbeiros
+            } catch (error) {
+                console.error("Erro ao buscar barbeiros:", error);
+            }
+        };
+
+        fetchBarbers(); // Chama a função ao carregar o componente
+    }, []);
 
     const handleServiceChange = (event) => {
         const { value, checked } = event.target;
@@ -69,9 +84,12 @@ const Schedule = () => {
                 <label htmlFor="barbeiro">Escolha o Barbeiro Abaixo</label>
                 <select id="barbeiro" value={barberId} onChange={(e) => setBarberId(e.target.value)} required>
                     <option value="" disabled>Selecione um barbeiro</option>
-                    <option value="1">Fulano</option>
-                    <option value="2">Cicrano</option>
-                    <option value="3">Beltrano</option>
+                    {/* Preenche o select com os barbeiros vindos do backend */}
+                    {barbers.map((barber) => (
+                        <option key={barber.id} value={barber.id}>
+                            {barber.name} {/* Ou qualquer atributo que você tenha em Barber */}
+                        </option>
+                    ))}
                 </select>
 
                 <label htmlFor="horario">Escolha o Horário Abaixo</label>
