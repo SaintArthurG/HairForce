@@ -6,6 +6,8 @@ import com.br.HairForce.backendHairForce.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class UserService {
@@ -27,6 +29,10 @@ public class UserService {
 
         userRepository.save(user);
         return user.getUsername();
+    }
+
+    public List<User> showUsers(){
+        return userRepository.findAll();
     }
 
 }

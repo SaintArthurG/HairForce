@@ -1,9 +1,12 @@
 package com.br.HairForce.backendHairForce.controller;
 
 import com.br.HairForce.backendHairForce.controller.DTO.CreateUserDTO;
+import com.br.HairForce.backendHairForce.entity.User;
 import com.br.HairForce.backendHairForce.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -22,9 +25,9 @@ public class UserController {
         return ResponseEntity.ok(userName);
     }
 
-    @GetMapping
-    public String msg (){
-        return "ok";
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> showUsers (){
+        return ResponseEntity.ok(userService.showUsers());
     }
 
 }
