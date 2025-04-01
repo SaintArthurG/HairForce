@@ -1,6 +1,4 @@
-/* Login.css */
 
-/* Adicionando box-sizing para garantir que o padding e a borda sejam contados no tamanho total */
 *,
 *::before,
 *::after {
@@ -31,7 +29,7 @@ form {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 400px;
-  box-sizing: border-box; /* Garantir que o padding não altere a largura do form */
+  box-sizing: border-box; 
 }
 
 .input-container {
@@ -43,7 +41,7 @@ form {
 .input-container input {
   width: 100%;
   padding: 12px;
-  padding-left: 35px; /* espaço para o ícone */
+  padding-left: 35px;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 1rem;
@@ -128,7 +126,6 @@ button:active {
   text-decoration: underline;
 }
 
-/* Mobile responsiveness */
 @media (max-width: 600px) {
   .container {
     padding: 20px;

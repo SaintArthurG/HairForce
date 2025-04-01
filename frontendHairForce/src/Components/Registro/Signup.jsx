@@ -25,7 +25,6 @@ const Signup = () => {
     event.preventDefault();
     const { username, email, password } = formData;
 
-    // Validações
     if (!username || !email) {
       setError("Preencha todos os campos!");
       return;
@@ -36,14 +35,12 @@ const Signup = () => {
       return;
     }
 
-
-    // Envio dos dados via axios
     axios
       .post("http://localhost:8080/api/usuarios/cadastro", formData)
       .then((response) => {
         console.log("Cadastro bem-sucedido", response.data);
         setSuccess("Cadastro realizado com sucesso! Você pode agora fazer login.");
-        setFormData({ username: "", email: "", password: "" }); // Limpa os campos após sucesso
+        setFormData({ username: "", email: "", password: "" }); 
       })
       .catch((err) => {
         if (err.response) {

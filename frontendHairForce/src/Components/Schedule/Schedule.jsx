@@ -5,20 +5,19 @@ const Schedule = () => {
     const [barberId, setBarberId] = useState("");
     const [time, setTime] = useState("");
     const [services, setServices] = useState([]);
-    const [barbers, setBarbers] = useState([]); // Estado para armazenar os barbeiros
+    const [barbers, setBarbers] = useState([]);
 
     useEffect(() => {
-        // Função para buscar barbeiros do backend
         const fetchBarbers = async () => {
             try {
                 const response = await axios.get("http://localhost:8080/barbers");
-                setBarbers(response.data); // Atualiza o estado com os barbeiros
+                setBarbers(response.data); 
             } catch (error) {
                 console.error("Erro ao buscar barbeiros:", error);
             }
         };
 
-        fetchBarbers(); // Chama a função ao carregar o componente
+        fetchBarbers(); 
     }, []);
 
     const handleServiceChange = (event) => {
@@ -37,8 +36,8 @@ const Schedule = () => {
         }
 
         const requestBody = {
-            barberId: parseInt(barberId, 10), // Converte para número
-            time: `${new Date().toISOString().split("T")[0]}T${time}:00`, // Converte para formato ISO
+            barberId: parseInt(barberId, 10), 
+            time: `${new Date().toISOString().split("T")[0]}T${time}:00`, 
             services: services
         };
 
@@ -84,10 +83,10 @@ const Schedule = () => {
                 <label htmlFor="barbeiro">Escolha o Barbeiro Abaixo</label>
                 <select id="barbeiro" value={barberId} onChange={(e) => setBarberId(e.target.value)} required>
                     <option value="" disabled>Selecione um barbeiro</option>
-                    {/* Preenche o select com os barbeiros vindos do backend */}
+                    {}
                     {barbers.map((barber) => (
                         <option key={barber.id} value={barber.id}>
-                            {barber.name} {/* Ou qualquer atributo que você tenha em Barber */}
+                            {barber.name} {}
                         </option>
                     ))}
                 </select>

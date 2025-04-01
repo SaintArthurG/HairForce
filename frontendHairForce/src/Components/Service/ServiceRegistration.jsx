@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import "./ServiceRegistration.css"; // Importa o CSS personalizado
+import "./ServiceRegistration.css";
 
 const Card = ({ children }) => <div className="card">{children}</div>;
 const CardContent = ({ children }) => <div>{children}</div>;
@@ -15,8 +15,7 @@ const ServiceRegistration = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // Garantir que o preço seja sempre numérico
-    if (name === "price" && !/^\d*\.?\d*$/.test(value)) return; // Permite apenas números e ponto
+    if (name === "price" && !/^\d*\.?\d*$/.test(value)) return;
     setService({ ...service, [name]: value });
   };
 
@@ -64,7 +63,7 @@ const ServiceRegistration = () => {
                 value={service.price}
                 onChange={handleChange}
                 step="0.01"
-                min="0"  // Impede números negativos
+                min="0" 
                 required
               />
             </div>
