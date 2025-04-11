@@ -5,7 +5,7 @@ import "./Signup"
 
 const SignupBarber = () => {
   const [formData, setFormData] = useState({
-    name: ""
+    nome: ""
   });
 
   const [error, setError] = useState("");
@@ -19,19 +19,19 @@ const SignupBarber = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const { name } = formData;
+    const { nome } = formData;
 
-    if (!name) {
+    if (!nome) {
       setError("Preencha o campo!");
       return;
     }
 
     axios
-      .post("http://localhost:8080/barber/cadastro", formData)
+      .post("http://localhost:8080/barbeiros", formData)
       .then((response) => {
         console.log("Barbeiro cadastrado com sucesso", response.data);
         setSuccess("Cadastro realizado com sucesso!");
-        setFormData({ name: ""});
+        setFormData({ nome: ""});
       })
       .catch((err) => {
         if (err.response) {
@@ -52,10 +52,10 @@ const SignupBarber = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          name="name"
-          value={formData.username}
+          name="nome"
+          value={formData.nome}
           onChange={handleChange}
-          placeholder="Name"
+          placeholder="Nome"
         />
         <button type="submit">Registrar</button>
       </form>

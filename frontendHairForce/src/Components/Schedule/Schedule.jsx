@@ -1,23 +1,25 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import './Schedule.css';
+
 
 const Schedule = () => {
-    const [barberId, setBarberId] = useState("");
+    const [id, setId] = useState("");
     const [time, setTime] = useState("");
     const [services, setServices] = useState([]);
-    const [barbers, setBarbers] = useState([]);
+    const [barbeiro, setBarbeiro] = useState([]);
 
     useEffect(() => {
-        const fetchBarbers = async () => {
+        const fetchBarbeiros = async () => {
             try {
-                const response = await axios.get("http://localhost:8080/barbers");
-                setBarbers(response.data); 
+                const response = await axios.get("http://localhost:8080/barbeiros");
+                setBarbeiro(response.data); 
             } catch (error) {
                 console.error("Erro ao buscar barbeiros:", error);
             }
         };
 
-        fetchBarbers(); 
+        fetchBarbeiros(); 
     }, []);
 
     const handleServiceChange = (event) => {
@@ -29,36 +31,42 @@ const Schedule = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        if (!barberId || !time || services.length === 0) {
-            alert("Por favor, preencha todos os campos.");
-            return;
+      
+        if (!id || !time || services.length === 0) {
+          alert("Por favor, preencha todos os campos.");
+          return;
         }
 
+        const serviceMap = {
+            "Cortar Cabelo": "CORTAR_CABELO",
+            "Fazer a Sobrancelha": "FAZER_SOBRANCELHA",
+            "Fazer a Barba": "FAZER_BARBA"
+          };
+      
         const requestBody = {
-            barberId: parseInt(barberId, 10), 
-            time: `${new Date().toISOString().split("T")[0]}T${time}:00`, 
-            services: services
+          id: parseInt(id, 10),
+          time: time, // ex: "11:00"
+          services: services.map(service => serviceMap[service]) // ex: ["CORTAR_CABELO", "FAZER_BARBA"]
         };
-
-        console.log(requestBody);
-
+      
+        console.log("Enviando:", requestBody);
+      
         try {
-            const response = await axios.post("http://localhost:8080/schedules", requestBody, {
-                headers: { "Content-Type": "application/json" }
-            });
-
-            if (response.status === 201 || response.status === 200) {
-                alert("Agendamento realizado com sucesso!");
-                setBarberId("");
-                setTime("");
-                setServices([]);
-            }
+          const response = await axios.post("http://localhost:8080/schedules", requestBody, {
+            headers: { "Content-Type": "application/json" }
+          });
+      
+          if (response.status === 201 || response.status === 200) {
+            alert("Agendamento realizado com sucesso!");
+            setId("");
+            setTime("");
+            setServices([]);
+          }
         } catch (error) {
-            console.error("Erro ao enviar requisição:", error);
-            alert("Erro ao agendar. Tente novamente.");
+          console.error("Erro ao enviar requisição:", error);
         }
-    };
+      };
+      
 
     return (
         <div className="container">
@@ -81,12 +89,12 @@ const Schedule = () => {
                 </fieldset>
 
                 <label htmlFor="barbeiro">Escolha o Barbeiro Abaixo</label>
-                <select id="barbeiro" value={barberId} onChange={(e) => setBarberId(e.target.value)} required>
+                <select id="barbeiro" value={id} onChange={(e) => setId(e.target.value)} required>
                     <option value="" disabled>Selecione um barbeiro</option>
                     {}
-                    {barbers.map((barber) => (
-                        <option key={barber.id} value={barber.id}>
-                            {barber.name} {}
+                    {barbeiro.map((barbeiro) => (
+                        <option key={barbeiro.id} value={barbeiro.id}>
+                            {barbeiro.nome} {}
                         </option>
                     ))}
                 </select>

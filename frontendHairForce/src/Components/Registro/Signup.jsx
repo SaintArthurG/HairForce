@@ -4,9 +4,10 @@ import axios from "axios";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
-    username: "",
+    nome: "",
     email: "",
-    password: ""
+    senha: "",
+    confirmarSenha: ""
   });
 
   const [error, setError] = useState("");
@@ -23,9 +24,9 @@ const Signup = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const { username, email, password } = formData;
+    const { nome, email, senha, confirmarSenha } = formData;
 
-    if (!username || !email) {
+    if (!nome || !email || !senha || !confirmarSenha) {
       setError("Preencha todos os campos!");
       return;
     }
@@ -35,12 +36,24 @@ const Signup = () => {
       return;
     }
 
+    if (senha !== confirmarSenha){
+      setError("Senhas devem ser iguais!");
+      return;
+    }
+
+    const dadosParaEnviar = {
+      nome,
+      email,
+      senha
+    };
+
+
     axios
-      .post("http://localhost:8080/api/usuarios/cadastro", formData)
-      .then((response) => {
+      .post("http://localhost:8080/usuarios", dadosParaEnviar)
+      .then((response) => {        
         console.log("Cadastro bem-sucedido", response.data);
         setSuccess("Cadastro realizado com sucesso! Você pode agora fazer login.");
-        setFormData({ username: "", email: "", password: "" }); 
+        setFormData({ nome: "", email: "", senha: "", confirmarSenha: "" }); 
       })
       .catch((err) => {
         if (err.response) {
@@ -61,10 +74,10 @@ const Signup = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          name="username"
-          value={formData.username}
+          name="nome"
+          value={formData.nome}
           onChange={handleChange}
-          placeholder="Username"
+          placeholder="Nome"
         />
         <input
           type="email"
@@ -76,10 +89,18 @@ const Signup = () => {
 
         <input
           type="password"
-          name="password"
-          value={formData.password}
+          name="senha"
+          value={formData.senha}
           onChange={handleChange}
-          placeholder="Password"
+          placeholder="Senha"
+        />
+
+        <input
+          type="password"
+          name="confirmarSenha"
+          value={formData.confirmarSenha}
+          onChange={handleChange}
+          placeholder="Confirmar Senha"
         />
 
 
