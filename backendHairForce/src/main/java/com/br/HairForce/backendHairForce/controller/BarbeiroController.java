@@ -36,4 +36,14 @@ public class BarbeiroController {
                 .map(DadosDetalhamentoBarbeiro::new).toList();
         return ResponseEntity.ok(dto);
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity excluirBarbeiro(@PathVariable Long id){
+        var barbeiro = repository.getReferenceById(id);
+        barbeiro.excuirBarbeiro();
+
+        return ResponseEntity.noContent().build();
+
+    }
 }

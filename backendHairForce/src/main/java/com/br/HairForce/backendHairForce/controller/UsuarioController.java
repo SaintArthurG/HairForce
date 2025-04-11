@@ -24,14 +24,26 @@ public class UsuarioController {
         var usuario = new Usuario(dados);
         repository.save(usuario);
         var uri = uriBuilder.path("/usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
+
         return ResponseEntity.created(uri).body(new DadosDetalhamentoUsuario(usuario));
     }
 
     @GetMapping
     public ResponseEntity<Page<DadosListagemUsuario>> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao){
         var page = repository.findAllByAtivoTrue(paginacao).map(DadosListagemUsuario::new);
+
         return ResponseEntity.ok(page);
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity excluir (@PathVariable Long id){
+        var usuario = repository.getReferenceById(id);
+        usuario.excluirUsuario();
+
+        return ResponseEntity.noContent().build();
+    }
+
 
 
 }
