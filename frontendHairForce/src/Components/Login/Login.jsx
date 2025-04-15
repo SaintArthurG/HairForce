@@ -86,7 +86,7 @@ const Login = () => {
 
                 <div className="recall-forget">
                     <label>
-                        <input type="checkbox" /> Lembre de mim
+                        <input type="checkbox" /> Lembre de mim Godoy
                     </label>
                     <a href="/forgot-password">Esqueceu a senha?</a>
                 </div>
