@@ -1,88 +1,140 @@
 .container {
-    max-width: 500px;
-    margin: 40px auto;
-    padding: 24px;
-    background-color: #fdfdfd;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 32px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: all 0.3s ease-in-out;
+}
+
+.container h1 {
+  text-align: center;
+  margin-bottom: 28px;
+  color: #222;
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+legend {
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #2c2c2c;
+  font-size: 1.05rem;
+  width: 100%;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  border: 1px solid #e9ecef;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.checkbox-item:hover {
+  background-color: #e9ecef;
+}
+
+.checkbox-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #0d6efd;
+  cursor: pointer;
+}
+
+.checkbox-item label {
+  margin: 0;
+  font-size: 1rem;
+  color: #444;
+  cursor: pointer;
+  flex-grow: 1;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #2c2c2c;
+  font-size: 1.05rem;
+}
+
+select {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ced4da;
+  font-size: 1rem;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+select:focus {
+  border-color: #0d6efd;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.2);
+  background-color: #fff;
+}
+
+button {
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background-color: #0d6efd;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.05rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  margin-top: 8px;
+}
+
+button:hover {
+  background-color: #0b5ed7;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin: 20px;
+    padding: 20px;
   }
-  
-  .container h1 {
-    text-align: center;
-    margin-bottom: 24px;
-    color: #333;
+
+  .checkbox-group {
+    padding: 8px;
   }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+
+  .checkbox-item {
+    padding: 6px;
   }
-  
-  fieldset {
-    border: none;
-    padding: 0;
-  }
-  
-  legend {
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #444;
-  }
-  
-  label {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    cursor: pointer;
-    color: #444;
-  }
-  
-  label input[type="checkbox"] {
-    margin-right: 8px;
-    accent-color: #0d6efd;
-  }
-  
-  select {
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    background-color: #fff;
-    color: #333;
-    transition: border-color 0.3s ease;
-  }
-  
-  select:focus {
-    border-color: #0d6efd;
-    outline: none;
-  }
-  
-  button {
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    background-color: #0d6efd;
-    color: #fff;
-    font-weight: bold;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #0b5ed7;
-  }
-  
-  @media (max-width: 600px) {
-    .container {
-      margin: 20px;
-      padding: 16px;
-    }
-  
-    button {
-      font-size: 0.95rem;
-    }
-  }
-  
+}
