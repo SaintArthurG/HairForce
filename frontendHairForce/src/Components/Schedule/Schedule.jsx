@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import './Schedule.css';
 
-
 const Schedule = () => {
     const [id, setId] = useState("");
     const [time, setTime] = useState("");
@@ -45,8 +44,8 @@ const Schedule = () => {
       
         const requestBody = {
           id: parseInt(id, 10),
-          time: time, // ex: "11:00"
-          services: services.map(service => serviceMap[service]) // ex: ["CORTAR_CABELO", "FAZER_BARBA"]
+          time: time,
+          services: services.map(service => serviceMap[service])
         };
       
         console.log("Enviando:", requestBody);
@@ -66,7 +65,6 @@ const Schedule = () => {
           console.error("Erro ao enviar requisição:", error);
         }
       };
-      
 
     return (
         <div className="container">
@@ -74,40 +72,56 @@ const Schedule = () => {
             <form onSubmit={handleSubmit}>
                 <fieldset>
                     <legend>Escolha os Serviços:</legend>
-                    {["Cortar Cabelo", "Fazer a Sobrancelha", "Fazer a Barba"].map((service) => (
-                        <label key={service}>
-                            <input
-                                type="checkbox"
-                                name="servicos"
-                                value={service}
-                                onChange={handleServiceChange}
-                                checked={services.includes(service)}
-                            />
-                            <span></span> {service}
-                        </label>
-                    ))}
+                    <div className="checkbox-group">
+                        {["Cortar Cabelo", "Fazer a Sobrancelha", "Fazer a Barba"].map((service) => (
+                            <div className="checkbox-item" key={service}>
+                                <input
+                                    type="checkbox"
+                                    id={`service-${service}`}
+                                    name="servicos"
+                                    value={service}
+                                    onChange={handleServiceChange}
+                                    checked={services.includes(service)}
+                                />
+                                <label htmlFor={`service-${service}`}>{service}</label>
+                            </div>
+                        ))}
+                    </div>
                 </fieldset>
 
-                <label htmlFor="barbeiro">Escolha o Barbeiro Abaixo</label>
-                <select id="barbeiro" value={id} onChange={(e) => setId(e.target.value)} required>
-                    <option value="" disabled>Selecione um barbeiro</option>
-                    {}
-                    {barbeiro.map((barbeiro) => (
-                        <option key={barbeiro.id} value={barbeiro.id}>
-                            {barbeiro.nome} {}
-                        </option>
-                    ))}
-                </select>
+                <div className="form-group">
+                    <label htmlFor="barbeiro">Escolha o Barbeiro</label>
+                    <select 
+                        id="barbeiro" 
+                        value={id} 
+                        onChange={(e) => setId(e.target.value)} 
+                        required
+                    >
+                        <option value="" disabled>Selecione um barbeiro</option>
+                        {barbeiro.map((barbeiro) => (
+                            <option key={barbeiro.id} value={barbeiro.id}>
+                                {barbeiro.nome}
+                            </option>
+                        ))}
+                    </select>
+                </div>
 
-                <label htmlFor="horario">Escolha o Horário Abaixo</label>
-                <select id="horario" value={time} onChange={(e) => setTime(e.target.value)} required>
-                    <option value="" disabled>Selecione um horário</option>
-                    <option value="09:00">09:00</option>
-                    <option value="10:00">10:00</option>
-                    <option value="11:00">11:00</option>
-                    <option value="14:00">14:00</option>
-                    <option value="15:00">15:00</option>
-                </select>
+                <div className="form-group">
+                    <label htmlFor="horario">Escolha o Horário</label>
+                    <select 
+                        id="horario" 
+                        value={time} 
+                        onChange={(e) => setTime(e.target.value)} 
+                        required
+                    >
+                        <option value="" disabled>Selecione um horário</option>
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                    </select>
+                </div>
 
                 <button type="submit">Agendar</button>
             </form>
