@@ -1,4 +1,4 @@
-package com.br.HairForce.backendHairForce.barbeiro;
+package com.br.HairForce.backendHairForce.domain.barbeiro;
 
 public record DadosDetalhamentoBarbeiro(Long id, String nome) {
     public DadosDetalhamentoBarbeiro(Barbeiro barbeiro){

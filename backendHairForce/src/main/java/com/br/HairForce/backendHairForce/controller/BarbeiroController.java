@@ -1,9 +1,9 @@
 package com.br.HairForce.backendHairForce.controller;
 
-import com.br.HairForce.backendHairForce.barbeiro.Barbeiro;
-import com.br.HairForce.backendHairForce.barbeiro.BarbeiroRepository;
-import com.br.HairForce.backendHairForce.barbeiro.DadosCadastroBarbeiro;
-import com.br.HairForce.backendHairForce.barbeiro.DadosDetalhamentoBarbeiro;
+import com.br.HairForce.backendHairForce.domain.barbeiro.Barbeiro;
+import com.br.HairForce.backendHairForce.domain.barbeiro.BarbeiroRepository;
+import com.br.HairForce.backendHairForce.domain.barbeiro.DadosCadastroBarbeiro;
+import com.br.HairForce.backendHairForce.domain.barbeiro.DadosDetalhamentoBarbeiro;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
