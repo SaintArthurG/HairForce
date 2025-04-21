@@ -7,17 +7,14 @@ import axios from "axios";
 import "./Login.css"
 
 const Login = () => {
-    const [formData, setFormData] = useState({ email: "", password: "" });
+    const [formData, setFormData] = useState({ email: "", senha: "" });
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
     const handleChange = (e) => {
+        const { email, senha } = formData;
         setFormData({ ...formData, [e.target.name]: e.target.value });
         setError("");
-    };
-
-    const isValidCPF = (cpf) => {
-        return /^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(cpf) || /^\d{11}$/.test(cpf);
     };
 
     const isValidEmail = (email) => {
@@ -27,7 +24,7 @@ const Login = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (!formData.email || !formData.password) {
+        if (!formData.email || !formData.senha) {
             setError("Preencha todos os campos!");
             return;
         }
@@ -36,6 +33,9 @@ const Login = () => {
             setError("Digite um e-mail ou CPF válido!");
             return;
         }
+
+        console.log(formData);
+        
 
         axios
             .post("http://localhost:8080/login", formData)
@@ -74,10 +74,10 @@ const Login = () => {
                 <div className="input-container">
                     <input
                         type="password"
-                        name="password"
+                        name="senha"
                         placeholder="Senha"
                         onChange={handleChange}
-                        value={formData.password}
+                        value={formData.senha}
                     />
                     <FaLock className="icon" />
                 </div>
@@ -86,18 +86,18 @@ const Login = () => {
 
                 <div className="recall-forget">
                     <label>
-                        <input type="checkbox" /> Lembre de mim 
+                        <input type="checkbox" /> Lembre de mim
                     </label>
                     <a href="/forgot-password">Esqueceu a senha?</a>
                 </div>
 
-                <button disabled={!formData.email || !formData.password}>
+                <button disabled={!formData.email || !formData.senha}>
                     Entrar
                 </button>
 
                 <div className="App">
                     <label>
-                        Não tem uma conta? <Link to="/signup">Registre-se</Link>
+                        Não tem uma conta? <Link to="/registro">Registre-se</Link>
                     </label>
                 </div>
             </form>
