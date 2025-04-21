@@ -1,8 +1,10 @@
 package com.br.HairForce.backendHairForce.infra.security;
 
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.br.HairForce.backendHairForce.domain.usuario.Usuario;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,19 @@ public class TokenService {
         } catch (JWTCreationException e){
             // Invalid Signing configuration / Couldn't convert Claims.
             throw new RuntimeException("Error ao gerar token jwt", e);
+        }
+    }
+
+    public String getSubject(String tokenJWT){
+        try {
+            var algoritimo = Algorithm.HMAC256(secret);
+            return JWT.require(algoritimo)
+                    .withIssuer("API Hairforce")
+                    .build()
+                    .verify(tokenJWT)
+                    .getSubject();
+        } catch (JWTVerificationException exception){
+            throw new RuntimeException("Token JWT invalido ou expirado");
         }
     }
 
