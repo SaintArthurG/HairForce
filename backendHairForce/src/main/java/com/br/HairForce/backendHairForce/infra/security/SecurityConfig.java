@@ -1,4 +1,4 @@
-package com.br.HairForce.backendHairForce.security;
+package com.br.HairForce.backendHairForce.infra.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

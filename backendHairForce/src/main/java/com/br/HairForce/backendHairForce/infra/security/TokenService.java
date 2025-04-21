@@ -1,4 +1,4 @@
-package com.br.HairForce.backendHairForce.security;
+package com.br.HairForce.backendHairForce.infra.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
