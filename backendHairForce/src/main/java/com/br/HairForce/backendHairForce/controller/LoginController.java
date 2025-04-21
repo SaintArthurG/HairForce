@@ -3,8 +3,8 @@ package com.br.HairForce.backendHairForce.controller;
 
 import com.br.HairForce.backendHairForce.domain.login.DadosLogin;
 import com.br.HairForce.backendHairForce.domain.usuario.Usuario;
-import com.br.HairForce.backendHairForce.security.DadosTokenJWT;
-import com.br.HairForce.backendHairForce.security.TokenService;
+import com.br.HairForce.backendHairForce.infra.security.DadosTokenJWT;
+import com.br.HairForce.backendHairForce.infra.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
