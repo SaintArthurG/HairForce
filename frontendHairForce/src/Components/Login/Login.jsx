@@ -29,29 +29,32 @@ const Login = () => {
             return;
         }
 
-        if (!isValidEmail(formData.email) && !isValidCPF(formData.email)) {
-            setError("Digite um e-mail ou CPF válido!");
+        if (!isValidEmail(formData.email)) {
+            setError("Digite um e-mail válido!");
             return;
         }
-
-        console.log(formData);
-        
 
         axios
             .post("http://localhost:8080/login", formData)
             .then((response) => {
-                console.log("Login bem-sucedido", response.data);
-                navigate("/dashboard");
+                navigate("/schedules");
             })
             .catch((err) => {
                 if (err.response) {
-                    setError(err.response.data.message || "Erro ao realizar login. Tente novamente.");
-                } else if (err.request) {
-                    setError("Não foi possível se conectar ao servidor. Tente novamente mais tarde.");
+                    console.log("Dados do erro:", err.response.data);
+                    console.log("Status do erro:", err.response.status);
+
+                    if (err.response.status === 400) {
+                        setError("E-mail ou senha inválidos.");
+                    } else if (err.response.status === 401) {
+                        setError("Não autorizado. Verifique email ou senha.");
+                    } else {
+                        setError("Erro inesperado no servidor.");
+                    }
+
                 } else {
-                    setError("Erro ao realizar a requisição.");
+                    setErro("Erro de conexão com o servidor.");
                 }
-                console.error("Erro:", err);
             });
     };
 
