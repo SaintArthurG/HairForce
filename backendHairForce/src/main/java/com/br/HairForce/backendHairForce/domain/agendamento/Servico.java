@@ -1,4 +1,4 @@
-package com.br.HairForce.backendHairForce.agendamento;
+package com.br.HairForce.backendHairForce.domain.agendamento;
 
 public enum Servico {
     CORTAR_CABELO,

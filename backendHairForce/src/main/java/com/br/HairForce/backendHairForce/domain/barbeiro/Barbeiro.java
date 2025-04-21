@@ -1,44 +1,33 @@
-package com.br.HairForce.backendHairForce.usuario;
+package com.br.HairForce.backendHairForce.domain.barbeiro;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
-import java.time.Instant;
-
-@Table(name = "usuarios")
-@Entity(name = "Usuario")
+@Table(name = "barbeiros")
+@Entity(name = "Barbeiro")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Usuario {
+public class Barbeiro {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
-
-    private String email;
-
-    private String senha;
-
     private Boolean ativo;
 
-    public Usuario(DadosCadastroUsuario dados){
+    public Barbeiro(DadosCadastroBarbeiro dados){
         this.ativo = true;
         this.nome = dados.nome();
-        this.email = dados.email();
-        this.senha = dados.senha();
     }
 
-    public void excluirUsuario(){
+    public void excuirBarbeiro(){
         this.ativo = false;
     }
+
 }
-
-

@@ -1,6 +1,6 @@
 package com.br.HairForce.backendHairForce.controller;
 
-import com.br.HairForce.backendHairForce.usuario.*;
+import com.br.HairForce.backendHairForce.domain.usuario.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

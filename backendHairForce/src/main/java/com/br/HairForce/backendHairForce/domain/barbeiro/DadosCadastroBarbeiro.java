@@ -1,4 +1,4 @@
-package com.br.HairForce.backendHairForce.barbeiro;
+package com.br.HairForce.backendHairForce.domain.barbeiro;
 
 import jakarta.validation.constraints.NotBlank;
 

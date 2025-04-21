@@ -1,4 +1,4 @@
-package com.br.HairForce.backendHairForce.usuario;
+package com.br.HairForce.backendHairForce.domain.usuario;
 
 public record DadosListagemUsuario(Long id, String nome, String email) {
     public DadosListagemUsuario(Usuario usuario){
