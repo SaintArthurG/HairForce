@@ -1,10 +1,14 @@
 package com.br.HairForce.backendHairForce.domain.barbeiro;
 
+import com.br.HairForce.backendHairForce.domain.agendamento.Agendamento;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Table(name = "barbeiros")
 @Entity(name = "Barbeiro")
@@ -20,6 +24,9 @@ public class Barbeiro {
 
     private String nome;
     private Boolean ativo;
+
+    @OneToMany(mappedBy = "barbeiro")
+    private List<Agendamento> agendamentos = new ArrayList<>();
 
     public Barbeiro(DadosCadastroBarbeiro dados){
         this.ativo = true;
