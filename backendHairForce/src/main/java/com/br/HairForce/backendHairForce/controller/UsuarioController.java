@@ -18,11 +18,13 @@ public class UsuarioController {
     @Autowired
     private UsuarioRepository repository;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
     @PostMapping
     @Transactional
     public ResponseEntity cadastrarUsuario(@RequestBody @Valid DadosCadastroUsuario dados, UriComponentsBuilder uriBuilder) {
-        var usuario = new Usuario(dados);
-        repository.save(usuario);
+        var usuario = usuarioService.criarUsuario(dados);
         var uri = uriBuilder.path("/usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
 
         return ResponseEntity.created(uri).body(new DadosDetalhamentoUsuario(usuario));
