@@ -32,6 +32,8 @@ public class SecurityConfig {
                     req.requestMatchers("/barbeiros").permitAll();
                     //permitindo o agendamento para todos, mas apenas para desenvolvimento e teste
                     req.requestMatchers("/agendamentos").permitAll();
+                    //permitindo POST de cadastro de usuario para todos
+                    req.requestMatchers("/usuarios/cadastro").permitAll();
                     req.anyRequest().authenticated();
                 })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
