@@ -30,6 +30,8 @@ public class SecurityConfig {
                     req.requestMatchers("/login").permitAll();
                     //permitindo o GET de barbeiros para o agendamento
                     req.requestMatchers("/barbeiros").permitAll();
+                    //permitindo o agendamento para todos, mas apenas para desenvolvimento e teste
+                    req.requestMatchers("/agendamentos").permitAll();
                     req.anyRequest().authenticated();
                 })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
