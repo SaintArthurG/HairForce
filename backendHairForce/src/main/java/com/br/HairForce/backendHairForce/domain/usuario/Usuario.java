@@ -31,11 +31,11 @@ public class Usuario implements UserDetails {
 
     private Boolean ativo;
 
-    public Usuario(DadosCadastroUsuario dados){
+    public Usuario(String nome, String email, String senha) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
         this.ativo = true;
-        this.nome = dados.nome();
-        this.email = dados.email();
-        this.senha = dados.senha();
     }
 
     public void excluirUsuario(){
