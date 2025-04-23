@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Signup.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom"; // Importe o useNavigate
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ const Signup = () => {
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const navigate = useNavigate(); // Hook para navegação
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -46,7 +48,6 @@ const Signup = () => {
       email,
       senha
     };
-
 
     axios
       .post("http://localhost:8080/usuarios", dadosParaEnviar)
@@ -103,8 +104,15 @@ const Signup = () => {
           placeholder="Confirmar Senha"
         />
 
-
         <button type="submit">Registrar</button>
+        
+        <button 
+          type="button" 
+          className="back-to-login" 
+          onClick={() => navigate('/')}
+        >
+          Voltar para Login
+        </button>
       </form>
     </div>
   );

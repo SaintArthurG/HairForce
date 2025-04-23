@@ -15,6 +15,17 @@
   font-family: 'Arial', sans-serif;
 }
 
+.signup-container .back-to-login {
+  background: transparent;
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.signup-container .back-to-login:hover {
+  color: #0056b3;
+  background: transparent;
+}
+
 h1 {
   font-size: 2rem;
   color: #333;
