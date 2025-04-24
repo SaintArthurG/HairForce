@@ -7,6 +7,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 
 @Table(name = "agendamentos")
 @Entity(name = "Agendamento")
@@ -20,8 +22,14 @@ public class Agendamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ElementCollection(targetClass = Servico.class)
     @Enumerated(EnumType.STRING)
-    private Servico servico;
+    @CollectionTable(
+            name = "agendamento_servicos",
+            joinColumns = @JoinColumn(name = "agendamento_id")
+    )
+    @Column(name = "servico")
+    private List<Servico> servico;
 
     @ManyToOne
     @JoinColumn(name = "barbeiro_id")
