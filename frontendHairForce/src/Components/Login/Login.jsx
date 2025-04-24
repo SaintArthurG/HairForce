@@ -37,7 +37,16 @@ const Login = () => {
         axios
             .post("http://localhost:8080/login", formData)
             .then((response) => {
-                navigate("/schedules");
+
+                const token = response.data.token;
+                if(!token){
+                    setError("Erro ao receber o token do servidor");
+                    return;
+                }
+                localStorage.setItem("token", token);
+                
+                
+                navigate("/agendamentos");
             })
             .catch((err) => {
                 if (err.response) {
@@ -53,7 +62,7 @@ const Login = () => {
                     }
 
                 } else {
-                    setErro("Erro de conexão com o servidor.");
+                    setError("Erro de conexão com o servidor.");
                 }
             });
     };

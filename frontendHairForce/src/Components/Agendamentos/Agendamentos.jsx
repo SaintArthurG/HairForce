@@ -1,74 +1,87 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import './Schedule.css';
+import './Agendamentos.css';
 
-const Schedule = () => {
-    const [id, setId] = useState("");
-    const [time, setTime] = useState("");
-    const [services, setServices] = useState([]);
-    const [barbeiro, setBarbeiro] = useState([]);
+const Agendamentos = () => {
+    const [barbeiroId, setBarbeiroId] = useState("");
+    const [hora, setHora] = useState("");
+    const [servicos, setServicos] = useState([]);
+    const [barbeiros, setBarbeiros] = useState([]);
+    const [errorMessage, setErrorMessage] = useState("");
+
 
     useEffect(() => {
         const fetchBarbeiros = async () => {
             try {
                 const response = await axios.get("http://localhost:8080/barbeiros");
-                setBarbeiro(response.data); 
+                setBarbeiros(response.data);
             } catch (error) {
                 console.error("Erro ao buscar barbeiros:", error);
             }
         };
 
-        fetchBarbeiros(); 
+        fetchBarbeiros();
     }, []);
 
     const handleServiceChange = (event) => {
         const { value, checked } = event.target;
-        setServices((prev) =>
+        setServicos((prev) =>
             checked ? [...prev, value] : prev.filter((service) => service !== value)
         );
+        setErrorMessage("");
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-      
-        if (!id || !time || services.length === 0) {
-          alert("Por favor, preencha todos os campos.");
-          return;
+
+        if (!barbeiroId || !hora || servicos.length === 0) {
+            alert("Por favor, preencha todos os campos.");
+            return;
         }
 
         const serviceMap = {
             "Cortar Cabelo": "CORTAR_CABELO",
             "Fazer a Sobrancelha": "FAZER_SOBRANCELHA",
             "Fazer a Barba": "FAZER_BARBA"
-          };
-      
-        const requestBody = {
-          id: parseInt(id, 10),
-          time: time,
-          services: services.map(service => serviceMap[service])
         };
-      
-        console.log("Enviando:", requestBody);
-      
+
+        const servicosFormatados = servicos.map((s) => serviceMap[s]);
+
+        const requestBody = {
+            barbeiroId: parseInt(barbeiroId, 10),
+            hora,
+            servico: servicosFormatados
+        };
+
         try {
-          const response = await axios.post("http://localhost:8080/schedules", requestBody, {
-            headers: { "Content-Type": "application/json" }
-          });
-      
-          if (response.status === 201 || response.status === 200) {
-            alert("Agendamento realizado com sucesso!");
-            setId("");
-            setTime("");
-            setServices([]);
+            const response = await axios.post("http://localhost:8080/agendamentos", requestBody, {
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+              }
+            });
+          
+            if (response.status === 201 || response.status === 200) {
+              alert("Agendamento realizado com sucesso!");
+              // Limpa os campos ou redireciona
+            }
+          } catch (error) {
+            if (error.response) {
+              // Aqui é onde capturamos a mensagem do backend
+              console.error("Erro:", error.response.data);
+              setErrorMessage(error.response.data);
+            } else {
+              console.error("Erro desconhecido:", error);
+              setErrorMessage("Erro ao se conectar com o servidor.");
+            }
           }
-        } catch (error) {
-          console.error("Erro ao enviar requisição:", error);
-        }
-      };
+          
+    };
 
     return (
         <div className="container">
             <h1>Agende seu Serviço</h1>
+            {errorMessage && <p className="error">{errorMessage}</p>}
             <form onSubmit={handleSubmit}>
                 <fieldset>
                     <legend>Escolha os Serviços:</legend>
@@ -81,7 +94,7 @@ const Schedule = () => {
                                     name="servicos"
                                     value={service}
                                     onChange={handleServiceChange}
-                                    checked={services.includes(service)}
+                                    checked={servicos.includes(service)}
                                 />
                                 <label htmlFor={`service-${service}`}>{service}</label>
                             </div>
@@ -91,14 +104,17 @@ const Schedule = () => {
 
                 <div className="form-group">
                     <label htmlFor="barbeiro">Escolha o Barbeiro</label>
-                    <select 
-                        id="barbeiro" 
-                        value={id} 
-                        onChange={(e) => setId(e.target.value)} 
+                    <select
+                        id="barbeiro"
+                        value={barbeiroId}
+                        onChange={(e) =>{
+                            setBarbeiroId(e.target.value);
+                            setErrorMessage("");
+                        } }
                         required
                     >
                         <option value="" disabled>Selecione um barbeiro</option>
-                        {barbeiro.map((barbeiro) => (
+                        {barbeiros.map((barbeiro) => (
                             <option key={barbeiro.id} value={barbeiro.id}>
                                 {barbeiro.nome}
                             </option>
@@ -108,10 +124,10 @@ const Schedule = () => {
 
                 <div className="form-group">
                     <label htmlFor="horario">Escolha o Horário</label>
-                    <select 
-                        id="horario" 
-                        value={time} 
-                        onChange={(e) => setTime(e.target.value)} 
+                    <select
+                        id="horario"
+                        value={hora}
+                        onChange={(e) => {setHora(e.target.value); setErrorMessage("");}}
                         required
                     >
                         <option value="" disabled>Selecione um horário</option>
@@ -129,4 +145,4 @@ const Schedule = () => {
     );
 };
 
-export default Schedule;
+export default Agendamentos;

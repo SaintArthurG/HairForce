@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import "./ServiceRegistration.css";
+import apiJWT from "../../services/apiJWT";
+
 
 const Card = ({ children }) => <div className="card">{children}</div>;
 const CardContent = ({ children }) => <div>{children}</div>;
@@ -24,7 +26,7 @@ const ServiceRegistration = () => {
     setLoading(true);
     setMessage("");
     try {
-      const response = await axios.post("http://localhost:8080/barber/services", {
+      const response = await apiJWT.post("http://localhost:8080/barber/services", {
         name: service.name,
         price: parseFloat(service.price),
       });
