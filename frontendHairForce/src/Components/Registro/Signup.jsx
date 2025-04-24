@@ -47,9 +47,8 @@ const Signup = () => {
       senha
     };
 
-
     axios
-      .post("http://localhost:8080/usuarios", dadosParaEnviar)
+      .post("http://localhost:8080/usuarios/cadastro", dadosParaEnviar)
       .then((response) => {        
         console.log("Cadastro bem-sucedido", response.data);
         setSuccess("Cadastro realizado com sucesso! Você pode agora fazer login.");
@@ -102,7 +101,6 @@ const Signup = () => {
           onChange={handleChange}
           placeholder="Confirmar Senha"
         />
-
 
         <button type="submit">Registrar</button>
       </form>

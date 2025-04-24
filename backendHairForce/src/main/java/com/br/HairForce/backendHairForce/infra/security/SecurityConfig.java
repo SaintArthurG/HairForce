@@ -30,8 +30,6 @@ public class SecurityConfig {
                     req.requestMatchers("/login").permitAll();
                     //permitindo o GET de barbeiros para o agendamento
                     req.requestMatchers("/barbeiros").permitAll();
-                    //permitindo o agendamento para todos, mas apenas para desenvolvimento e teste
-                    req.requestMatchers("/agendamentos").permitAll();
                     //permitindo POST de cadastro de usuario para todos
                     req.requestMatchers("/usuarios/cadastro").permitAll();
                     req.anyRequest().authenticated();

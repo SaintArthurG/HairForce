@@ -44,7 +44,7 @@ const Login = () => {
                     return;
                 }
                 localStorage.setItem("token", token);
-                
+                console.log(token);
                 
                 navigate("/agendamentos");
             })
