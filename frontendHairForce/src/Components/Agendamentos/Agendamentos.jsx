@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import './Agendamentos.css';
+import apiJWT from "../../services/apiJWT";
 
 const Agendamentos = () => {
     const [barbeiroId, setBarbeiroId] = useState("");
@@ -52,27 +53,30 @@ const Agendamentos = () => {
             hora,
             servico: servicosFormatados
         };
+        
 
         try {
-            const response = await axios.post("http://localhost:8080/agendamentos", requestBody, {
-              headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem("token")}`
-              }
-            });
-          
+            const token = localStorage.getItem('token');
+            console.log(token);
+            
+            const response = await apiJWT.post("http://localhost:8080/agendamentos", requestBody);
             if (response.status === 201 || response.status === 200) {
               alert("Agendamento realizado com sucesso!");
-              // Limpa os campos ou redireciona
+                setBarbeiroId("");
+                setHora("");
+                setServicos([]);
+
             }
           } catch (error) {
             if (error.response) {
-              // Aqui é onde capturamos a mensagem do backend
               console.error("Erro:", error.response.data);
               setErrorMessage(error.response.data);
-            } else {
-              console.error("Erro desconhecido:", error);
+            } else if (error.request){
+              console.error("Erro de rede sem resposta:", error.request);
               setErrorMessage("Erro ao se conectar com o servidor.");
+            } else {
+                console.log(error.message);
+                
             }
           }
           
