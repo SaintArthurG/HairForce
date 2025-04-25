@@ -111,7 +111,7 @@ const Login = () => {
 
                 <div className="App">
                     <label>
-                        Não tem uma conta? <Link to="/registro">Cadastre-se</Link>
+                        Não tem uma conta? <Link to="/cadastro">Cadastre-se</Link>
                     </label>
                 </div>
             </form>
