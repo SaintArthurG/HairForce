@@ -100,7 +100,9 @@ const Login = () => {
                     <label>
                         <input type="checkbox" /> Lembre de mim
                     </label>
-                    <a href="/forgot-password">Esqueceu a senha?</a>
+                    <label>
+                        <Link to="/esqueciSenha">Esqueceu a senha?</Link>
+                    </label>
                 </div>
 
                 <button disabled={!formData.email || !formData.senha}>
