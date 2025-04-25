@@ -1,8 +1,8 @@
 import { useState } from "react";
-import "./Signup.css";
+import "./Registro.css"
 import axios from "axios";
 
-const Signup = () => {
+const Registro = () => {
   const [formData, setFormData] = useState({
     nome: "",
     email: "",
@@ -108,4 +108,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Registro;
