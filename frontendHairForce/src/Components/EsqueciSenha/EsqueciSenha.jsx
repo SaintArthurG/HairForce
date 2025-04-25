@@ -13,7 +13,7 @@ const EsqueciSenha = () => {
 
   const handleResetPassword = () => {
     axios
-      .post(`${serverContext}usuario/mudarSenha`, { email })
+      .post(`${serverContext}usuario/resetarSenha`, { email })
       .then((response) => {
         // Se a requisição for bem-sucedida, redireciona para a página de login com uma mensagem
         window.location.href = `${serverContext}?message=${response.data.message}`;
