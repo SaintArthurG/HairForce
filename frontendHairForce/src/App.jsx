@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./Components/Login/Login";
-import Registro from "./Components/Registro/Registro";
-import SignupBarber from "./Components/Registro/SignupBarber";
+import Cadastro from "./Components/Cadastro/Cadastro";
+import SignupBarber from "./Components/Cadastro/SignupBarber";
 import Agendamentos from "./Components/Agendamentos/Agendamentos"
 import EsqueciSenha from "./Components/EsqueciSenha/EsqueciSenha"
 import Header from "./Components/Header/Header";
@@ -15,7 +15,7 @@ function App() {
             <Header />
             <Routes>
                 <Route path="/" element={<Login />} />
-                <Route path="/registro" element={<Registro />} />
+                <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/signupbarber" element={<SignupBarber />} />
                 <Route path="/agendamentos" element={<Agendamentos />} />
                 <Route path="/esqueciSenha" element={<EsqueciSenha />} />
