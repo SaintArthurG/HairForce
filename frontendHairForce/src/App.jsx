@@ -1,11 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./Components/Login/Login";
-import Signup from "./Components/Registro/Signup";
-import './App.css'
+import Registro from "./Components/Registro/Registro";
 import SignupBarber from "./Components/Registro/SignupBarber";
 import Agendamentos from "./Components/Agendamentos/Agendamentos"
 import EsqueciSenha from "./Components/EsqueciSenha/EsqueciSenha"
 import Header from "./Components/Header/Header";
+
+import './App.css'
+
 
 function App() {
     return (
@@ -13,7 +15,7 @@ function App() {
             <Header />
             <Routes>
                 <Route path="/" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
+                <Route path="/registro" element={<Registro />} />
                 <Route path="/signupbarber" element={<SignupBarber />} />
                 <Route path="/agendamentos" element={<Agendamentos />} />
                 <Route path="/esqueciSenha" element={<EsqueciSenha />} />
