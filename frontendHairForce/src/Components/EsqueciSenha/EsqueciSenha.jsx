@@ -13,18 +13,18 @@ const EsqueciSenha = () => {
 
   const handleResetPassword = () => {
     axios
-      .post(`${serverContext}usuario/resetarSenha`, { email })
+      .put(`http://localhost:8080/usuarios/resetarSenha`, { email })
       .then((response) => {
-        // Se a requisição for bem-sucedida, redireciona para a página de login com uma mensagem
-        window.location.href = `${serverContext}?message=${response.data.message}`;
+        console.log(email);
+        setMessage(response.data.message || 'Verifique seu e-mail para redefinir sua senha.');
+        setEmail('');
+        setError('');
       })
       .catch((err) => {
         if (err.response) {
-          // Caso de erro do servidor (400, 500, etc)
           if (err.response.data.error && err.response.data.error.includes("MailError")) {
             window.location.href = `${serverContext}emailError.html`;
           } else {
-            // Outros tipos de erro
             setError(err.response.data.message || 'Erro desconhecido');
           }
         } else {
