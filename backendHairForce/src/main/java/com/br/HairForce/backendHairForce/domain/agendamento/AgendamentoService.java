@@ -5,6 +5,8 @@ import com.br.HairForce.backendHairForce.domain.barbeiro.BarbeiroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AgendamentoService {
 
@@ -28,6 +30,14 @@ public class AgendamentoService {
         agendamentoRepository.save(agendamento);
 
         return new DadosAgendamentoResponse(agendamento);
+    }
+
+    public List<DadosAgendamentoResponse> listarAgendamentos(){
+        var agendamentos = agendamentoRepository.findAllByAtivoTrue();
+        return agendamentos.stream().map(DadosAgendamentoResponse::new).toList();
+                //var dto = barbeiros.stream()
+        //                .map(DadosDetalhamentoBarbeiro::new).toList();
+        //        return ResponseEntity.ok(dto);
     }
 
 

@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/agendamentos")
 public class AgendamentoController {
@@ -19,6 +21,12 @@ public class AgendamentoController {
     public ResponseEntity<DadosAgendamentoResponse> criarAgendamento(@RequestBody DadosAgendamentoRequest dados){
         var response = agendamentoService.criarAgendamento(dados);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<DadosAgendamentoResponse>> listarAgendamentos(){
+        var response = agendamentoService.listarAgendamentos();
+        return ResponseEntity.ok().body(response);
     }
 
 }

@@ -34,6 +34,7 @@ public class SecurityConfig {
                     req.requestMatchers("/usuarios/cadastro").permitAll();
                     req.requestMatchers("/usuarios/resetarSenha").permitAll();
                     req.requestMatchers("/usuarios/set-password").permitAll();
+                    req.requestMatchers("/agendamentos").permitAll();
                     req.anyRequest().authenticated();
                 })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
