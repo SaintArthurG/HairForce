@@ -1,15 +1,23 @@
 package com.br.HairForce.backendHairForce.controller;
 
+import com.br.HairForce.backendHairForce.domain.service.EmailSendService;
 import com.br.HairForce.backendHairForce.domain.usuario.*;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -20,6 +28,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private EmailSendService sendService;
 
     @PostMapping("/cadastro")
     @Transactional
@@ -46,6 +57,15 @@ public class UsuarioController {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/resetarSenha")
+    public ResponseEntity forgotPassword(@RequestBody EmailRequestDTO dados) {
+        return new ResponseEntity<>(usuarioService.forgotPassword(dados.email()), HttpStatus.OK);
+    }
+
+    @PutMapping("/set-password")
+    public ResponseEntity<String> setNewPassword(@RequestBody SetSenhaRequest req){
+        return new ResponseEntity<>(usuarioService.setNewPassword(req.email(), req.novaSenha()), HttpStatus.OK);
+    }
 
 
 }

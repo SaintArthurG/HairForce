@@ -1,12 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+
+import './App.css'
+import SetPassword from "./Components/SetPassord/SetPassword";
 import Login from "./Components/Login/Login";
 import Cadastro from "./Components/Cadastro/Cadastro";
 import SignupBarber from "./Components/Cadastro/SignupBarber";
 import Agendamentos from "./Components/Agendamentos/Agendamentos"
 import EsqueciSenha from "./Components/EsqueciSenha/EsqueciSenha"
 import Header from "./Components/Header/Header";
-
-import './App.css'
 
 
 function App() {
@@ -19,6 +21,7 @@ function App() {
                 <Route path="/signupbarber" element={<SignupBarber />} />
                 <Route path="/agendamentos" element={<Agendamentos />} />
                 <Route path="/esqueciSenha" element={<EsqueciSenha />} />
+                <Route path="/setarSenha" element={<SetPassword />} />
             </Routes>
         </Router>
     );

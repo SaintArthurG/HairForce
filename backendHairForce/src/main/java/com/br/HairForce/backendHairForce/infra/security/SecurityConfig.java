@@ -32,6 +32,8 @@ public class SecurityConfig {
                     req.requestMatchers("/barbeiros").permitAll();
                     //permitindo POST de cadastro de usuario para todos
                     req.requestMatchers("/usuarios/cadastro").permitAll();
+                    req.requestMatchers("/usuarios/resetarSenha").permitAll();
+                    req.requestMatchers("/usuarios/set-password").permitAll();
                     req.anyRequest().authenticated();
                 })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
