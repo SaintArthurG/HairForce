@@ -1,6 +1,7 @@
 package com.br.HairForce.backendHairForce.domain.agendamento;
 
 import com.br.HairForce.backendHairForce.domain.barbeiro.Barbeiro;
+import com.br.HairForce.backendHairForce.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -34,6 +35,10 @@ public class Agendamento {
     @ManyToOne
     @JoinColumn(name = "barbeiro_id")
     private Barbeiro barbeiro;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
     private String hora;
 
