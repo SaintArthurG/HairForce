@@ -47,27 +47,40 @@ const Cadastro = () => {
       senha
     };
 
+    try{
+
     axios
       .post("http://localhost:8080/usuarios/cadastro", dadosParaEnviar)
       .then((response) => {        
         console.log("Cadastro bem-sucedido", response.data);
         setSuccess("Cadastro realizado com sucesso! Você pode agora fazer login.");
         setFormData({ nome: "", email: "", senha: "", confirmarSenha: "" }); 
+        setError("");
       })
       .catch((err) => {
+        console.log("algos errado", err);
+        
         if (err.response) {
+          setError("");
           console.error("Erro no cadastro:", err.response.data);
           setError("Erro ao realizar cadastro. Tente novamente.");
         } else {
+          setError("");
           console.error("Erro no servidor:", err.message);
           setError("Erro ao se conectar ao servidor.");
         }
       });
+
+    } catch (error) {
+      console.error("Erro inesperado:", error);
+      setError("Erro inesperado. Tente novamente.");
+    }
+
   };
 
   return (
     <div className="signup-container">
-      <h1>Cadastro</h1>
+      <h1>Cadastro de usuario</h1>
       {error && <div className="error">{error}</div>}
       {success && <div className="success">{success}</div>}
       <form onSubmit={handleSubmit}>
