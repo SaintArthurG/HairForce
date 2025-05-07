@@ -7,7 +7,7 @@ import java.util.List;
 
 public record DadosAgendamentoRequest(
         @NotNull
-        Long idUsuario,
+        Long usuarioId,
 
         @NotBlank
         String hora,
@@ -15,6 +15,5 @@ public record DadosAgendamentoRequest(
         @NotBlank
         List<Servico> servico,
 
-        @NotBlank
         Long barbeiroId) {
 }
