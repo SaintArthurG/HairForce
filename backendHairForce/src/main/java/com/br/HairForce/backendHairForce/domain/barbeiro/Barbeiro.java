@@ -23,6 +23,7 @@ public class Barbeiro {
     private Long id;
 
     private String nome;
+
     private Boolean ativo;
 
     @OneToMany(mappedBy = "barbeiro")

@@ -9,13 +9,16 @@ const Agendamentos = () => {
     const [servicos, setServicos] = useState([]);
     const [barbeiros, setBarbeiros] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
+    
+    const opcaoSemPreferencia = { id: null, nome: "Sem preferência" };
 
 
     useEffect(() => {
         const fetchBarbeiros = async () => {
             try {
                 const response = await axios.get("http://localhost:8080/barbeiros");
-                setBarbeiros(response.data);
+                const barbeirosComOpcao = [opcaoSemPreferencia, ...response.data];
+                setBarbeiros(barbeirosComOpcao);          
             } catch (error) {
                 console.error("Erro ao buscar barbeiros:", error);
             }
@@ -35,7 +38,7 @@ const Agendamentos = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        if (!barbeiroId || !hora || servicos.length === 0) {
+        if (!hora || servicos.length === 0) {
             alert("Por favor, preencha todos os campos.");
             return;
         }
@@ -49,7 +52,7 @@ const Agendamentos = () => {
         const servicosFormatados = servicos.map((s) => serviceMap[s]);
 
         const requestBody = {
-            barbeiroId: parseInt(barbeiroId, 10),
+            barbeiroId: barbeiroId === "null" ? null : parseInt(barbeiroId, 10),
             hora,
             servico: servicosFormatados
         };

@@ -44,14 +44,21 @@ public class Agendamento {
 
     private Boolean ativo;
 
-    public Agendamento (DadosAgendamentoRequest dados, Barbeiro barbeiro){
+    @Column(name = "motivo_cancelamento")
+    @Enumerated(EnumType.STRING)
+    private MotivoCancelamento motivoCancelamento;
+
+    public Agendamento (DadosAgendamentoRequest dados, Barbeiro barbeiro, Usuario usuario){
         this.ativo = true;
         this.servico = dados.servico();
         this.hora = dados.hora();
         this.barbeiro = barbeiro;
+        this.usuario = usuario;
+        this.motivoCancelamento = null;
     }
 
-    public void desativarAgendamento(){
+    public void desativarAgendamento(MotivoCancelamento motivo){
         this.ativo = false;
+        this.motivoCancelamento = motivo;
     }
 }
