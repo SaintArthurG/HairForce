@@ -5,6 +5,7 @@ import com.br.HairForce.backendHairForce.domain.barbeiro.BarbeiroRepository;
 import com.br.HairForce.backendHairForce.domain.usuario.Usuario;
 import com.br.HairForce.backendHairForce.domain.usuario.UsuarioRepository;
 import com.br.HairForce.backendHairForce.exception.ValidacaoException;
+import com.br.HairForce.backendHairForce.infra.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,9 +23,11 @@ public class AgendamentoService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public DadosAgendamentoResponse criarAgendamento(DadosAgendamentoRequest dados){
 
-        if (!usuarioRepository.existsById(dados.usuarioId())){
+    public DadosAgendamentoResponse criarAgendamento(DadosAgendamentoRequest dados, Long usuarioId){
+
+        //PRECISA PEGAR O ID DO USUARIO PELO BACKEND NAO ENVIAR DIRETO DO FRONT, NO CASO TEHNO QUE MUDAR O DTO
+        if (!usuarioRepository.existsById(usuarioId)){
             throw new ValidacaoException("Id do usuario invalido");
         }
 
@@ -34,7 +37,7 @@ public class AgendamentoService {
 
         var barbeiro = escolherBarbeiro(dados);
 
-        var usuario = usuarioRepository.getReferenceById(dados.usuarioId());
+        var usuario = usuarioRepository.getReferenceById(usuarioId);
 
         boolean existeConflito = agendamentoRepository.existsByBarbeiroAndHora(barbeiro, dados.hora());
 
@@ -48,8 +51,8 @@ public class AgendamentoService {
         return new DadosAgendamentoResponse(agendamento);
     }
 
-    public List<DadosAgendamentoResponse> listarAgendamentos(){
-        var agendamentos = agendamentoRepository.findAllByAtivoTrue();
+    public List<DadosAgendamentoResponse> listarAgendamentos(Usuario usuario){
+        var agendamentos = agendamentoRepository.findByUsuario(usuario);
         return agendamentos.stream().map(DadosAgendamentoResponse::new).toList();
                 //var dto = barbeiros.stream()
         //                .map(DadosDetalhamentoBarbeiro::new).toList();
