@@ -6,6 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.br.HairForce.backendHairForce.domain.usuario.Usuario;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
+@Slf4j
 @Service
 public class TokenService {
 
@@ -25,6 +27,7 @@ public class TokenService {
             return JWT.create()
                     .withIssuer("API Hairforce")
                     .withSubject(usuario.getEmail())
+                    .withClaim("role", usuario.getRole().getAuthority())
                     .withExpiresAt(dataExpiracao())
                     .sign(algoritimo);
         } catch (JWTCreationException e){

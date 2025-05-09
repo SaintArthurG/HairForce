@@ -22,7 +22,7 @@ public class UsuarioService {
     public Usuario criarUsuario(DadosCadastroUsuario dados){
         String senhaCriptografada = encoder.encode(dados.senha());
 
-        var usuario = new Usuario(dados.nome(), dados.email(), senhaCriptografada);
+        var usuario = new Usuario(dados.nome(), dados.email(), senhaCriptografada, null);
         return usuarioRepository.save(usuario);
     }
 

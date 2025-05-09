@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import "./Cadastro"
+import apiJWT from "../../services/apiJWT";
+
 
 
 const SignupBarber = () => {
@@ -26,7 +28,7 @@ const SignupBarber = () => {
       return;
     }
 
-    axios
+    apiJWT
       .post("http://localhost:8080/barbeiros", formData)
       .then((response) => {
         console.log("Barbeiro cadastrado com sucesso", response.data);
