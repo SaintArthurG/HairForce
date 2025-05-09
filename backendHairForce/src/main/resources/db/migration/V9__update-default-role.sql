@@ -1,0 +1,4 @@
+UPDATE usuarios SET role = 'BURACO' WHERE role IS NULL;
+
+ALTER TABLE usuarios
+MODIFY role VARCHAR(20) NOT NULL;

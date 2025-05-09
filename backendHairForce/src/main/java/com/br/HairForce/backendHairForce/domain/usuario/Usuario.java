@@ -9,8 +9,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.management.relation.Role;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Table(name = "usuarios")
 @Entity(name = "Usuario")
@@ -31,10 +33,14 @@ public class Usuario implements UserDetails {
 
     private Boolean ativo;
 
-    public Usuario(String nome, String email, String senha) {
+    @Enumerated(EnumType.STRING)
+    private RoleEnum role;
+
+    public Usuario(String nome, String email, String senha, RoleEnum role) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.role = role != null ? role : RoleEnum.BURACO;
         this.ativo = true;
     }
 
@@ -48,7 +54,7 @@ public class Usuario implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(("ROLE_USER")));
+        return List.of(role);
     }
 
     @Override
