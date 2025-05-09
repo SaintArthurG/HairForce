@@ -11,5 +11,5 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> 
     boolean existsByBarbeiroAndHora(Barbeiro barbeiro, String hora);
     List<Agendamento> findAllByAtivoTrue();
 
-    List<Agendamento> findByUsuario(Usuario usuario);
+    List<Agendamento> findByUsuarioIdAndAtivoTrue(Long usuarioId);
 }

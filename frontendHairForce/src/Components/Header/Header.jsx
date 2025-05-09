@@ -1,5 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 
+import "./Header.css"
+
 const Header = () => {
     const navigate = useNavigate(); // Hook para navegação
     const token = localStorage.getItem("token");
@@ -15,7 +17,7 @@ const Header = () => {
             <nav className="nav">
                 <ul>
                     <li><Link to="/">Login</Link></li>
-                    <li><Link to="/signup">Cadastro Cliente</Link></li>
+                    <li><Link to="/cadastro">Cadastro Cliente</Link></li>
                     <li><Link to="/signupbarber">Cadastro Barbeiro</Link></li>
                     <li><Link to="/agendamentos">Agendamentos</Link></li>
                 </ul>

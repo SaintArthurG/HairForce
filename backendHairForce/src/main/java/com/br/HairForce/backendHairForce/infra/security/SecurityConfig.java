@@ -23,7 +23,7 @@ public class SecurityConfig {
     private SecurityFilter securityFilter;
 
     @Bean
-    public SecurityFilterChain sfc(HttpSecurity http) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sm ->sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req ->{
@@ -32,9 +32,9 @@ public class SecurityConfig {
                     req.requestMatchers("/barbeiros").permitAll();
                     //permitindo POST de cadastro de usuario para todos
                     req.requestMatchers("/usuarios/cadastro").permitAll();
+                    req.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
                     req.requestMatchers("/usuarios/resetarSenha").permitAll();
                     req.requestMatchers("/usuarios/set-password").permitAll();
-                    req.requestMatchers("/agendamentos").permitAll();
                     req.anyRequest().authenticated();
                 })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

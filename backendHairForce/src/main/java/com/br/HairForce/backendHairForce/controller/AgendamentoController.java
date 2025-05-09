@@ -25,9 +25,6 @@ public class AgendamentoController {
     @PostMapping
     @Transactional
     public ResponseEntity<DadosAgendamentoResponse> criarAgendamento(@RequestBody DadosAgendamentoRequest dados, @AuthenticationPrincipal Usuario usuarioAutenticado){
-        if (usuarioAutenticado.getId() == null){
-            throw new NullPointerException("Precisa estar logado para agendar");
-        }
         var usuarioId = usuarioAutenticado.getId();
         var response = agendamentoService.criarAgendamento(dados, usuarioId);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -35,9 +32,11 @@ public class AgendamentoController {
 
     @GetMapping
     public ResponseEntity<List<DadosAgendamentoResponse>> listarAgendamentos(@AuthenticationPrincipal Usuario usuarioAutenticado){
-        var response = agendamentoService.listarAgendamentos(usuarioAutenticado);
+        var usuarioId = usuarioAutenticado.getId();
+        var response = agendamentoService.listarAgendamentos(usuarioId);
         return ResponseEntity.ok().body(response);
     }
+
 
     @DeleteMapping
     @Transactional
