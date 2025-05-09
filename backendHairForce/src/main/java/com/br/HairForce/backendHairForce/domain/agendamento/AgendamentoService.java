@@ -51,19 +51,15 @@ public class AgendamentoService {
         return new DadosAgendamentoResponse(agendamento);
     }
 
-    public List<DadosAgendamentoResponse> listarAgendamentos(Usuario usuario){
-        var agendamentos = agendamentoRepository.findByUsuario(usuario);
+    public List<DadosAgendamentoResponse> listarAgendamentos(Long usuarioId){
+        var agendamentos = agendamentoRepository.findByUsuarioIdAndAtivoTrue(usuarioId);
         return agendamentos.stream().map(DadosAgendamentoResponse::new).toList();
-                //var dto = barbeiros.stream()
-        //                .map(DadosDetalhamentoBarbeiro::new).toList();
-        //        return ResponseEntity.ok(dto);
     }
 
     private Barbeiro escolherBarbeiro(DadosAgendamentoRequest dados){
         if(dados.barbeiroId() != null){
             return barbeiroRepository.getReferenceById(dados.barbeiroId());
         }
-
         return barbeiroRepository.encontrarBarbeiroLivre(dados.hora());
     }
 

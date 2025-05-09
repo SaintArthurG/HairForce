@@ -59,16 +59,13 @@ const Agendamentos = () => {
         
 
         try {
-            const token = localStorage.getItem('token');
-            console.log(token);
-            
             const response = await apiJWT.post("http://localhost:8080/agendamentos", requestBody);
+
             if (response.status === 201 || response.status === 200) {
               alert("Agendamento realizado com sucesso!");
                 setBarbeiroId("");
                 setHora("");
                 setServicos([]);
-
             }
           } catch (error) {
             if (error.response) {
@@ -79,7 +76,6 @@ const Agendamentos = () => {
               setErrorMessage("Erro ao se conectar com o servidor.");
             } else {
                 console.log(error.message);
-                
             }
           }
           

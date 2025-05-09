@@ -16,4 +16,18 @@ apiJWT.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+apiJWT.interceptors.response.use(
+  response => response,
+  error => {
+    if (error.response && error.response.status === 401) {
+      // Redireciona para login ou remove token inválido
+      localStorage.removeItem("token");
+      window.location.href = "/";
+    }
+    return Promise.reject(error);
+  }
+);
+
+
+
 export default apiJWT;
