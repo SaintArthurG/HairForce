@@ -1,5 +1,4 @@
 import { useState } from "react";
-import axios from "axios";
 import "./Cadastro"
 import apiJWT from "../../services/apiJWT";
 
@@ -38,7 +37,7 @@ const SignupBarber = () => {
       .catch((err) => {
         if (err.response) {
           console.error("Erro no cadastro:", err.response.data);
-          setError("Erro ao realizar cadastro. Tente novamente.");
+          setError(err.response.data);
         } else {
           console.error("Erro no servidor:", err.message);
           setError("Erro ao se conectar ao servidor.");

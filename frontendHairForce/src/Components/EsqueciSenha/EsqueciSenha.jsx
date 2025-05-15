@@ -25,6 +25,7 @@ const EsqueciSenha = () => {
           if (err.response.data.error && err.response.data.error.includes("MailError")) {
             window.location.href = `${serverContext}emailError.html`;
           } else {
+            console.log(email);
             setError(err.response.data.message || 'Erro desconhecido');
           }
         } else {
