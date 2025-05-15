@@ -1,0 +1,67 @@
+:root {
+    --branco: #ffffff;
+    --preto: #1a1a1a;
+    --vermelho: #b22222;
+    --cinza-escuro: #2b2b2b;
+  }
+  
+  body {
+    background-color: var(--cinza-escuro);
+    color: var(--branco);
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .agendamento-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #1e1e1e;
+    border: 1px solid var(--preto);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  }
+  
+  .titulo {
+    font-size: 2rem;
+    color: var(--vermelho);
+    border-bottom: 2px solid var(--vermelho);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .mensagem,
+  .loading,
+  .error {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-top: 2rem;
+  }
+  
+  .error {
+    color: var(--vermelho);
+    font-weight: bold;
+  }
+  
+  .lista-agendamentos {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .item-agendamento {
+    background-color: #2d2d2d;
+    color: var(--branco);
+    border-left: 5px solid var(--vermelho);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.05);
+  }
+  
+  .item-agendamento p {
+    margin: 0.4rem 0;
+  }
+  
