@@ -2,38 +2,28 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaUser, FaLock } from 'react-icons/fa'
 import { useState } from 'react'
 
-import apiJWT from "../../services/apiJWT";
 
 import axios from "axios";
 
 const SetPassord = () => {
-    const [formData, setFormData] = useState({ email: "", novaSenha: "" });
+    const [formData, setFormData] = useState({ novaSenha: "" });
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
     const handleChange = (e) => {
-        const { email, novaSenha } = formData;
+        const { novaSenha } = formData;
         setFormData({ ...formData, [e.target.name]: e.target.value });
         setError("");
     };
 
-    const isValidEmail = (email) => {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (!formData.email || !formData.novaSenha) {
+        if (!formData.novaSenha) {
             setError("Preencha todos os campos!");
             return;
         }
-
-        if (!isValidEmail(formData.email)) {
-            setError("Digite um e-mail válido!");
-            return;
-        }
-
         axios
             .put("http://localhost:8080/usuarios/set-password", formData)
             .then((response) => {
@@ -47,7 +37,7 @@ const SetPassord = () => {
                     if (err.response.status === 400) {
                         setError("E-mail ou senha inválidos.");
                     } else if (err.response.status === 401) {
-                        setError("Não autorizado. Verifique email ou senha.");
+                        setError("Não autorizado. Verifique se a senha segue os criterios.");
                     } else {
                         setError("Erro inesperado no servidor.");
                     }
@@ -62,18 +52,6 @@ const SetPassord = () => {
         <div className='container'>
             <form onSubmit={handleSubmit}>
                 <h1>Resete a senha</h1>
-
-                <div className="input-container">
-                    <input
-                        type="text"
-                        name="email"
-                        placeholder="E-mail"
-                        onChange={handleChange}
-                        value={formData.email}
-                    />
-                    <FaUser className="icon" />
-                </div>
-
                 <div className="input-container">
                     <input
                         type="password"
@@ -83,13 +61,15 @@ const SetPassord = () => {
                         value={formData.novaSenha}
                     />
                     <FaLock className="icon" />
+
+                    <input type="hidden" name="token" value="${token}" />
                 </div>
 
                 {error && <p className="error">{error}</p>}
 
 
-                <button disabled={!formData.email || !formData.novaSenha}>
-                    Entrar
+                <button disabled={!formData.novaSenha}>
+                    <span>Redefinir Senha</span>
                 </button>
 
                 <div className="App">

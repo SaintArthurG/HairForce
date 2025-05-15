@@ -21,7 +21,7 @@ function App() {
                 <Route path="/signupbarber" element={<SignupBarber />} />
                 <Route path="/agendamentos" element={<Agendamentos />} />
                 <Route path="/esqueciSenha" element={<EsqueciSenha />} />
-                <Route path="/setarSenha" element={<SetPassword />} />
+                <Route path="/set-password" element={<SetPassword />} />
             </Routes>
         </Router>
     );
