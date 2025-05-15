@@ -13,17 +13,16 @@ public class EmailSendService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public void sendSetPasswordEmail(String email) throws MessagingException{
+    public void sendSetPasswordEmail(String email, String token) throws MessagingException{
+        String resetLink = "http://localhost:5173/set-password?token=" + token;
+        String message = "Clique no link abaixo para resetar sua senha:\n" + resetLink;
+
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
         mimeMessageHelper.setFrom("arthurpulsar8.6.1@gmail.com");
         mimeMessageHelper.setTo(email);
         mimeMessageHelper.setSubject("Set Password");
-        mimeMessageHelper.setText("""
-            <div>
-                <a href="http://localhost:5173/setarSenha">Clique aqui para definir sua senha</a>
-            </div>
-            """.formatted(email), true);
+        mimeMessageHelper.setText(message);
 
         mailSender.send(mimeMessage);
     }

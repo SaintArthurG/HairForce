@@ -1,6 +1,7 @@
 package com.br.HairForce.backendHairForce.domain.usuario;
 
 import com.br.HairForce.backendHairForce.domain.service.EmailSendService;
+import com.br.HairForce.backendHairForce.infra.security.TokenService;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +20,9 @@ public class UsuarioService {
     @Autowired
     private EmailSendService emailSendService;
 
+    @Autowired
+    private TokenService tokenService;
+
     public Usuario criarUsuario(DadosCadastroUsuario dados){
         String senhaCriptografada = encoder.encode(dados.senha());
 
@@ -33,18 +37,20 @@ public class UsuarioService {
 
     public String forgotPassword(String email) {
         var usuario = usuarioRepository.findByEmail(email);
+        var tokenReset = tokenService.gerarToken((Usuario) usuario);
         try {
-            emailSendService.sendSetPasswordEmail(email);
-            System.out.println(usuario);
+            emailSendService.sendSetPasswordEmail(email, tokenReset);
         } catch (MessagingException e){
             throw new RuntimeException("Unable to send set password email please try again" + e.getMessage() + email + usuario);
         }
-        return "Check your email to set new password to yout account";
+        return "Check your email to set new password to yout account " + email;
     }
 
 
-    public String setNewPassword(String email, String novaSenha) {
-        UserDetails userDetails = usuarioRepository.findByEmail(email);
+    public String setNewPassword(String token, String novaSenha) {
+        var emailUsuario = tokenService.getSubject(token);
+        System.out.println(emailUsuario);
+        UserDetails userDetails = usuarioRepository.findByEmail(emailUsuario);
 
         if(!(userDetails instanceof Usuario usuario)){
             throw new IllegalStateException("Usuario invalido");
