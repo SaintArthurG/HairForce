@@ -38,7 +38,6 @@ public class UsuarioService {
     public String forgotPassword(String email) {
         var usuario = usuarioRepository.findByEmail(email);
         var tokenReset = tokenService.gerarToken((Usuario) usuario);
-        System.out.println(tokenReset);
         try {
             emailSendService.sendSetPasswordEmail(email, tokenReset);
         } catch (MessagingException e){
@@ -50,7 +49,6 @@ public class UsuarioService {
 
     public String setNewPassword(String token, String novaSenha) {
         var emailUsuario = tokenService.getSubject(token);
-        System.out.println(emailUsuario);
         UserDetails userDetails = usuarioRepository.findByEmail(emailUsuario);
 
         if(!(userDetails instanceof Usuario usuario)){

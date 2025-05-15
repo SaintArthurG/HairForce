@@ -13,11 +13,10 @@ const Header = () => {
     return (
         <header className="header">
             <div className="header-container">
-                <h1 className="logo">HairForce</h1>
+                <h1 className="logo"> <Link to={"/"} >HairForce</Link></h1>
                 <nav className="nav">
                     <ul className="nav-list">
-                        <li><Link to="/">Login</Link></li>
-                        <li><Link to="/cadastro">Cadastro Cliente</Link></li>
+                        <li><Link to="/login">Login</Link></li>
                         <li><Link to="/signupbarber">Cadastro Barbeiro</Link></li>
                         <li><Link to="/agendamentos">Agendamentos</Link></li>
                         <li><Link to="/meus-agendamentos">Meus agendamentos</Link></li>

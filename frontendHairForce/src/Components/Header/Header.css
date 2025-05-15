@@ -29,7 +29,11 @@
     text-transform: uppercase;
     letter-spacing: 1px;
   }
-  
+
+  .logo Link{
+    text-underline-offset:unset;
+  }
+
   .nav {
     flex: 1;
     margin-left: 2rem;
