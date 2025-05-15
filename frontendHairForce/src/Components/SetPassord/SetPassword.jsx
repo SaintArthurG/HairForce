@@ -1,5 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
-import { FaUser, FaLock } from 'react-icons/fa'
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { FaLock } from 'react-icons/fa'
 import { useState } from 'react'
 
 
@@ -16,6 +16,9 @@ const SetPassord = () => {
         setError("");
     };
 
+    const [searchParams] = useSearchParams();
+    const token = searchParams.get("token");
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -25,7 +28,7 @@ const SetPassord = () => {
             return;
         }
         axios
-            .put("http://localhost:8080/usuarios/set-password", formData)
+            .put(`http://localhost:8080/usuarios/set-password?token=${token}`, formData)
             .then((response) => {
                 navigate("/");
             })
@@ -61,8 +64,6 @@ const SetPassord = () => {
                         value={formData.novaSenha}
                     />
                     <FaLock className="icon" />
-
-                    <input type="hidden" name="token" value="${token}" />
                 </div>
 
                 {error && <p className="error">{error}</p>}

@@ -2,6 +2,8 @@ package com.br.HairForce.backendHairForce.controller;
 
 import com.br.HairForce.backendHairForce.domain.service.EmailSendService;
 import com.br.HairForce.backendHairForce.domain.usuario.*;
+import com.br.HairForce.backendHairForce.infra.security.TokenService;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -31,6 +33,7 @@ public class UsuarioController {
 
     @Autowired
     private EmailSendService sendService;
+
 
     @PostMapping("/cadastro")
     @Transactional
@@ -63,8 +66,8 @@ public class UsuarioController {
     }
 
     @PutMapping("/set-password")
-    public ResponseEntity<String> setNewPassword(@RequestBody SetSenhaRequest req){
-        return new ResponseEntity<>(usuarioService.setNewPassword(req.email(), req.novaSenha()), HttpStatus.OK);
+    public ResponseEntity<String> setNewPassword(@RequestParam("token") String token, @RequestBody SetSenhaRequest dados){
+        return new ResponseEntity<>(usuarioService.setNewPassword(token, dados.novaSenha()), HttpStatus.OK);
     }
 
 
