@@ -57,7 +57,7 @@ form {
 
 .input-container .icon {
   position: absolute;
-  left: 10px;
+  left: 90%;
   top: 50%;
   transform: translateY(-50%);
   color: #aaa;
@@ -115,6 +115,7 @@ button:active {
 .App {
   text-align: center;
   margin-top: 20px;
+  color: #777;
 }
 
 .App a {

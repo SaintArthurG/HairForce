@@ -17,7 +17,7 @@ function App() {
         <Router>
             <Header />
             <Routes>
-                <Route path="/" element={<Login />} />
+                <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/signupbarber" element={<SignupBarber />} />
                 <Route path="/agendamentos" element={<Agendamentos />} />

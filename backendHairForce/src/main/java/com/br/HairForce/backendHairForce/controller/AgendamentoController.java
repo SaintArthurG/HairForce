@@ -35,7 +35,6 @@ public class AgendamentoController {
     public ResponseEntity<List<DadosAgendamentoResponse>> listarAgendamentosPorUsuario(@AuthenticationPrincipal Usuario usuarioAutenticado){
         var usuarioId = usuarioAutenticado.getId();
         var response = agendamentoService.listarAgendamentosPorUsuario(usuarioId);
-        System.out.println(response);
         return ResponseEntity.ok().body(response);
     }
 
