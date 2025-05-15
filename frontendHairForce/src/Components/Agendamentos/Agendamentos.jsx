@@ -18,7 +18,10 @@ const Agendamentos = () => {
             try {
                 const response = await axios.get("http://localhost:8080/barbeiros");
                 const barbeirosComOpcao = [opcaoSemPreferencia, ...response.data];
-                setBarbeiros(barbeirosComOpcao);          
+                setBarbeiros(barbeirosComOpcao); 
+                if (!localStorage.getItem('token')) {
+                    setErrorMessage('Você precisa estar logado para acessar esta página.');
+                }         
             } catch (error) {
                 console.error("Erro ao buscar barbeiros:", error);
             }
