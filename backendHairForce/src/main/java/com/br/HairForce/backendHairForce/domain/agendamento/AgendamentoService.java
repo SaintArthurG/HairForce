@@ -7,6 +7,7 @@ import com.br.HairForce.backendHairForce.domain.usuario.UsuarioRepository;
 import com.br.HairForce.backendHairForce.exception.ValidacaoException;
 import com.br.HairForce.backendHairForce.infra.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -51,7 +52,12 @@ public class AgendamentoService {
         return new DadosAgendamentoResponse(agendamento);
     }
 
-    public List<DadosAgendamentoResponse> listarAgendamentos(Long usuarioId){
+    public List<DadosAgendamentoResponse> listarTodosAgendamentos(){
+        var agendamentos = agendamentoRepository.findAllByAtivoTrue();
+        return agendamentos.stream().map(DadosAgendamentoResponse::new).toList();
+    }
+
+    public List<DadosAgendamentoResponse> listarAgendamentosPorUsuario(Long usuarioId){
         var agendamentos = agendamentoRepository.findByUsuarioIdAndAtivoTrue(usuarioId);
         return agendamentos.stream().map(DadosAgendamentoResponse::new).toList();
     }
@@ -70,4 +76,5 @@ public class AgendamentoService {
         var agendamento = agendamentoRepository.getReferenceById(dados.idAgendamento());
         agendamento.desativarAgendamento(dados.motivo());
     }
+
 }

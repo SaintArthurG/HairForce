@@ -9,6 +9,7 @@ import SignupBarber from "./Components/Cadastro/SignupBarber";
 import Agendamentos from "./Components/Agendamentos/Agendamentos"
 import EsqueciSenha from "./Components/EsqueciSenha/EsqueciSenha"
 import Header from "./Components/Header/Header";
+import MeusAgendamentos from "./Components/Agendamentos/Meus/MeusAgendamentos";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/agendamentos" element={<Agendamentos />} />
                 <Route path="/esqueciSenha" element={<EsqueciSenha />} />
                 <Route path="/set-password" element={<SetPassword />} />
+                <Route path="/meus-agendamentos" element={<MeusAgendamentos />} />
             </Routes>
         </Router>
     );

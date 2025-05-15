@@ -2,17 +2,18 @@
   max-width: 500px;
   margin: 40px auto;
   padding: 32px;
-  background-color: #ffffff;
+  background-color: #1c1c1c; /* fundo escuro, mas não preto puro */
   border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 24px rgba(255, 0, 0, 0.1);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: all 0.3s ease-in-out;
+  color: #f1f1f1;
 }
 
 .container h1 {
   text-align: center;
   margin-bottom: 28px;
-  color: #222;
+  color: #e10600; /* vermelho Vasco */
   font-size: 1.75rem;
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -33,7 +34,7 @@ fieldset {
 legend {
   font-weight: 600;
   margin-bottom: 12px;
-  color: #2c2c2c;
+  color: #777;
   font-size: 1.05rem;
   width: 100%;
 }
@@ -43,9 +44,9 @@ legend {
   flex-direction: column;
   gap: 12px;
   padding: 12px;
-  background-color: #f8f9fa;
+  background-color: #2a2a2a;
   border-radius: 10px;
-  border: 1px solid #e9ecef;
+  border: 1px solid #444;
 }
 
 .checkbox-item {
@@ -58,20 +59,20 @@ legend {
 }
 
 .checkbox-item:hover {
-  background-color: #e9ecef;
+  background-color: #333;
 }
 
 .checkbox-item input[type="checkbox"] {
   width: 18px;
   height: 18px;
-  accent-color: #0d6efd;
+  accent-color: #e10600;
   cursor: pointer;
 }
 
 .checkbox-item label {
   margin: 0;
   font-size: 1rem;
-  color: #444;
+  color: #ddd;
   cursor: pointer;
   flex-grow: 1;
 }
@@ -84,44 +85,57 @@ legend {
 
 .form-group label {
   font-weight: 600;
-  color: #2c2c2c;
+  color: #777; /* antes: #eee */
   font-size: 1.05rem;
 }
+
+.checkbox-item label {
+  color: #ccc; /* antes: #ddd */
+}
+
 
 select {
   padding: 12px;
   border-radius: 10px;
-  border: 1px solid #ced4da;
+  border: 1px solid #555;
   font-size: 1rem;
-  background-color: #f8f9fa;
+  background-color: #2a2a2a;
+  color: #fff;
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
 select:focus {
-  border-color: #0d6efd;
+  border-color: #e10600;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.2);
-  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(225, 6, 0, 0.3);
+  background-color: #1e1e1e;
 }
 
 button {
   padding: 14px;
   border: none;
   border-radius: 10px;
-  background-color: #0d6efd;
+  background-color: #e10600;
   color: #fff;
   font-weight: bold;
   font-size: 1.05rem;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2);
   transition: all 0.3s ease;
   margin-top: 8px;
 }
 
 button:hover {
-  background-color: #0b5ed7;
+  background-color: #c10500;
   transform: translateY(-2px);
+}
+
+.error {
+  color: #ff4d4f;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 @media (max-width: 600px) {

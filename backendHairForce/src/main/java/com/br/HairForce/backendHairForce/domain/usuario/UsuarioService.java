@@ -38,6 +38,7 @@ public class UsuarioService {
     public String forgotPassword(String email) {
         var usuario = usuarioRepository.findByEmail(email);
         var tokenReset = tokenService.gerarToken((Usuario) usuario);
+        System.out.println(tokenReset);
         try {
             emailSendService.sendSetPasswordEmail(email, tokenReset);
         } catch (MessagingException e){

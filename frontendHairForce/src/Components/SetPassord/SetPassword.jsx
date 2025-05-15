@@ -2,7 +2,6 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { FaLock } from 'react-icons/fa'
 import { useState } from 'react'
 
-
 import axios from "axios";
 
 const SetPassord = () => {
@@ -30,6 +29,7 @@ const SetPassord = () => {
         axios
             .put(`http://localhost:8080/usuarios/set-password?token=${token}`, formData)
             .then((response) => {
+                alert("Senha redefinida com sucesso!");
                 navigate("/");
             })
             .catch((err) => {

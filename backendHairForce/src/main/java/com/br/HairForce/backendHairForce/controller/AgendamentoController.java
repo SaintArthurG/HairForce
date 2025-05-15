@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,13 +31,13 @@ public class AgendamentoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @GetMapping
-    public ResponseEntity<List<DadosAgendamentoResponse>> listarAgendamentos(@AuthenticationPrincipal Usuario usuarioAutenticado){
+    @GetMapping("/meus-agendamentos")
+    public ResponseEntity<List<DadosAgendamentoResponse>> listarAgendamentosPorUsuario(@AuthenticationPrincipal Usuario usuarioAutenticado){
         var usuarioId = usuarioAutenticado.getId();
-        var response = agendamentoService.listarAgendamentos(usuarioId);
+        var response = agendamentoService.listarAgendamentosPorUsuario(usuarioId);
+        System.out.println(response);
         return ResponseEntity.ok().body(response);
     }
-
 
     @DeleteMapping
     @Transactional
@@ -45,4 +46,10 @@ public class AgendamentoController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping
+    @PreAuthorize("hasRole('ROLE_PICA')")
+    public ResponseEntity<List<DadosAgendamentoResponse>> listarTodosAgendamentos(){
+        var response = agendamentoService.listarTodosAgendamentos();
+        return ResponseEntity.ok().body(response);
+    }
 }
