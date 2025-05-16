@@ -19,11 +19,9 @@ const Agendamentos = () => {
                 const response = await axios.get("http://localhost:8080/barbeiros");
                 const barbeirosComOpcao = [opcaoSemPreferencia, ...response.data];
                 setBarbeiros(barbeirosComOpcao); 
-                if (!localStorage.getItem('token')) {
-                    setErrorMessage('Você precisa estar logado para acessar esta página.');
-                }         
+                        
             } catch (error) {
-                console.error("Erro ao buscar barbeiros:", error);
+                setErrorMessage("Erro ao buscar barbeiros")
             }
         };
 
@@ -72,13 +70,11 @@ const Agendamentos = () => {
             }
           } catch (error) {
             if (error.response) {
-              console.error("Erro:", error.response.data);
               setErrorMessage(error.response.data);
             } else if (error.request){
-              console.error("Erro de rede sem resposta:", error.request);
               setErrorMessage("Erro ao se conectar com o servidor.");
             } else {
-                console.log(error.message);
+                setErrorMessage(error.message);
             }
           }
           

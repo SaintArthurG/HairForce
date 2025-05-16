@@ -30,16 +30,13 @@ const SignupBarber = () => {
     apiJWT
       .post("http://localhost:8080/barbeiros", formData)
       .then((response) => {
-        console.log("Barbeiro cadastrado com sucesso", response.data);
         setSuccess("Cadastro realizado com sucesso!");
         setFormData({ nome: ""});
       })
       .catch((err) => {
         if (err.response) {
-          console.error("Erro no cadastro:", err.response.data);
           setError(err.response.data);
         } else {
-          console.error("Erro no servidor:", err.message);
           setError("Erro ao se conectar ao servidor.");
         }
       });
