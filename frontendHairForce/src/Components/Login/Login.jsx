@@ -47,7 +47,7 @@ const Login = () => {
                 localStorage.setItem("token", token);
                 console.log(token);
                 
-                navigate("/agendamentos");
+                navigate("/novo-agendamento");
             })
             .catch((err) => {
                 if (err.response) {
