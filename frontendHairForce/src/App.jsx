@@ -11,6 +11,7 @@ import EsqueciSenha from "./Components/EsqueciSenha/EsqueciSenha"
 import Header from "./Components/Header/Header";
 import MeusAgendamentos from "./Components/Agendamentos/Meus/MeusAgendamentos";
 import Home from "./Components/Home/Home";
+import Barbeiro from "./Components/Barbeiro/Barbeiro";
 
 
 function App() {
@@ -26,6 +27,8 @@ function App() {
                 <Route path="/esqueci-senha" element={<EsqueciSenha />} />
                 <Route path="/nova-senha" element={<SetPassword />} />
                 <Route path="/meus-agendamentos" element={<MeusAgendamentos />} />
+                <Route path="/area-barbeiro" element={<Barbeiro />} />
+
             </Routes>
         </Router>
     );
