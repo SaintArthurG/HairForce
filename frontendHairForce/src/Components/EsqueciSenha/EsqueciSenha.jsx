@@ -15,7 +15,6 @@ const EsqueciSenha = () => {
     axios
       .put(`http://localhost:8080/usuarios/resetarSenha`, { email })
       .then((response) => {
-        console.log(email);
         setMessage(response.data.message || 'Verifique seu e-mail para redefinir sua senha.');
         setEmail('');
         setError('');
@@ -25,7 +24,6 @@ const EsqueciSenha = () => {
           if (err.response.data.error && err.response.data.error.includes("MailError")) {
             window.location.href = `${serverContext}emailError.html`;
           } else {
-            console.log(email);
             setError(err.response.data.message || 'Erro desconhecido');
           }
         } else {

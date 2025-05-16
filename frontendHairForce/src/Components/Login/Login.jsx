@@ -45,15 +45,11 @@ const Login = () => {
                     return;
                 }
                 localStorage.setItem("token", token);
-                console.log(token);
                 
                 navigate("/novo-agendamento");
             })
             .catch((err) => {
                 if (err.response) {
-                    console.log("Dados do erro:", err.response.data);
-                    console.log("Status do erro:", err.response.status);
-
                     if (err.response.status === 400) {
                         setError("E-mail ou senha inválidos.");
                     } else if (err.response.status === 401) {
@@ -61,7 +57,6 @@ const Login = () => {
                     } else {
                         setError("Erro inesperado no servidor.");
                     }
-
                 } else {
                     setError("Erro de conexão com o servidor.");
                 }

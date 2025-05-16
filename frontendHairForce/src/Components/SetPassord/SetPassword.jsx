@@ -34,9 +34,6 @@ const SetPassord = () => {
             })
             .catch((err) => {
                 if (err.response) {
-                    console.log("Dados do erro:", err.response.data);
-                    console.log("Status do erro:", err.response.status);
-
                     if (err.response.status === 400) {
                         setError("E-mail ou senha inválidos.");
                     } else if (err.response.status === 401) {
@@ -67,7 +64,6 @@ const SetPassord = () => {
                 </div>
 
                 {error && <p className="error">{error}</p>}
-
 
                 <button disabled={!formData.novaSenha}>
                     <span>Redefinir Senha</span>
