@@ -39,7 +39,6 @@ const Login = () => {
         axios
             .post("http://localhost:8080/login", formData)
             .then((response) => {
-
                 const token = response.data.token;
                 if(!token){
                     setError("Erro ao receber o token do servidor");
@@ -103,7 +102,7 @@ const Login = () => {
                         <input type="checkbox" /> Lembre de mim
                     </label>
                     <label>
-                        <Link to="/esqueciSenha">Esqueceu a senha?</Link>
+                        <Link to="/esqueci-senha">Esqueceu a senha?</Link>
                     </label>
                 </div>
 

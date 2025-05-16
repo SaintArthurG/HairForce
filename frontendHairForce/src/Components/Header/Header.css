@@ -13,7 +13,11 @@
     top: 0;
     z-index: 100;
   }
-  
+
+  .header a {
+    text-decoration: none;
+  }
+
   .header-container {
     display: flex;
     align-items: center;
@@ -23,15 +27,11 @@
   }
   
   .logo {
-    font-size: 1.4rem;
+    font-size: 1.9rem;
     font-weight: bold;
     color: var(--vermelho);
     text-transform: uppercase;
     letter-spacing: 1px;
-  }
-
-  .logo Link{
-    text-underline-offset:unset;
   }
 
   .nav {
@@ -73,4 +73,34 @@
     background-color: var(--vermelho);
     color: var(--branco);
   }
-  
+  .barber-area {
+    background-color: var(--cinza-escuro);
+    padding: 1rem;
+    border-radius: 8px;
+    color: var(--branco);
+    font-size: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
+  }
+
+  .barber-area h2 {
+    font-size: 1.5rem;
+    color: var(--vermelho);
+    margin-bottom: 0.5rem;
+  }
+
+  .barber-area p {
+    margin: 0.5rem 0;
+    line-height: 1.5;
+  }
+
+  .barber-area a {
+    color: var(--vermelho);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+
+  .barber-area a:hover {
+    color: var(--branco);
+  }

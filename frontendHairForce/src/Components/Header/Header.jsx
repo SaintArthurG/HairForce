@@ -13,16 +13,16 @@ const Header = () => {
     return (
         <header className="header">
             <div className="header-container">
-                <h1 className="logo"> <Link to={"/"} >HairForce</Link></h1>
+                <Link to={"/"}><h1 className="logo">HairForce</h1></Link>
                 <nav className="nav">
                     <ul className="nav-list">
                         <li><Link to="/login">Login</Link></li>
-                        <li><Link to="/signupbarber">Cadastro Barbeiro</Link></li>
-                        <li><Link to="/agendamentos">Agendamentos</Link></li>
+                        <li><Link to="/novo-agendamento">Agendamentos</Link></li>
                         <li><Link to="/meus-agendamentos">Meus agendamentos</Link></li>
                     </ul>
                 </nav>
                 {token && <button className="logout-btn" onClick={handleLogout}>Logout</button>}
+                <Link to="/area-barbeiro" className="barber-area-link">Área do Barbeiro</Link>
             </div>
         </header>
     );
