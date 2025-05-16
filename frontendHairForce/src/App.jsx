@@ -10,6 +10,7 @@ import Agendamentos from "./Components/Agendamentos/Agendamentos"
 import EsqueciSenha from "./Components/EsqueciSenha/EsqueciSenha"
 import Header from "./Components/Header/Header";
 import MeusAgendamentos from "./Components/Agendamentos/Meus/MeusAgendamentos";
+import Home from "./Components/Home/Home";
 
 
 function App() {
@@ -17,12 +18,13 @@ function App() {
         <Router>
             <Header />
             <Routes>
+                <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<Cadastro />} />
-                <Route path="/signupbarber" element={<SignupBarber />} />
-                <Route path="/agendamentos" element={<Agendamentos />} />
-                <Route path="/esqueciSenha" element={<EsqueciSenha />} />
-                <Route path="/set-password" element={<SetPassword />} />
+                <Route path="/cadastro-barbeiro" element={<SignupBarber />} />
+                <Route path="/novo-agendamento" element={<Agendamentos />} />
+                <Route path="/esqueci-senha" element={<EsqueciSenha />} />
+                <Route path="/nova-senha" element={<SetPassword />} />
                 <Route path="/meus-agendamentos" element={<MeusAgendamentos />} />
             </Routes>
         </Router>
