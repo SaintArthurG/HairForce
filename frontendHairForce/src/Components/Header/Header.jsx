@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import logo2 from "../../assets/logo.png";
 import "./Header.css";
 
 const Header = () => {
@@ -13,6 +14,7 @@ const Header = () => {
     return (
         <header className="header">
             <div className="header-container">
+                 <img src={logo2} alt="Logo2" className="logo2" />
                 <Link to={"/"}><h1 className="logo">HairForce</h1></Link>
                 <nav className="nav">
                     <ul className="nav-list">
