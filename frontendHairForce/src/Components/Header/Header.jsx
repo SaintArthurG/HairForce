@@ -21,10 +21,10 @@ const Header = () => {
                         <li><Link to="/login">Login</Link></li>
                         <li><Link to="/novo-agendamento">Agendamentos</Link></li>
                         <li><Link to="/meus-agendamentos">Meus agendamentos</Link></li>
+                        <li><Link to="/area-barbeiro" className="barber-area-link">Área do Barbeiro</Link></li>
                     </ul>
                 </nav>
                 {token && <button className="logout-btn" onClick={handleLogout}>Logout</button>}
-                <Link to="/area-barbeiro" className="barber-area-link">Área do Barbeiro</Link>
             </div>
         </header>
     );
