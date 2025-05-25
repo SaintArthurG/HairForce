@@ -11,6 +11,7 @@ const Cadastro = () => {
   });
 
   const [error, setError] = useState("");
+  
   const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
@@ -52,27 +53,21 @@ const Cadastro = () => {
     axios
       .post("http://localhost:8080/usuarios/cadastro", dadosParaEnviar)
       .then((response) => {        
-        console.log("Cadastro bem-sucedido", response.data);
         setSuccess("Cadastro realizado com sucesso! Você pode agora fazer login.");
         setFormData({ nome: "", email: "", senha: "", confirmarSenha: "" }); 
         setError("");
       })
-      .catch((err) => {
-        console.log("algos errado", err);
-        
+      .catch((err) => {        
         if (err.response) {
           setError("");
-          console.error("Erro no cadastro:", err.response.data);
           setError("Erro ao realizar cadastro. Tente novamente.");
         } else {
           setError("");
-          console.error("Erro no servidor:", err.message);
           setError("Erro ao se conectar ao servidor.");
         }
       });
 
     } catch (error) {
-      console.error("Erro inesperado:", error);
       setError("Erro inesperado. Tente novamente.");
     }
 

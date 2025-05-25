@@ -22,7 +22,7 @@ apiJWT.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       // Redireciona para login ou remove token inválido
       localStorage.removeItem("token");
-      window.location.href = "/";
+      window.location.href = "/"; // Redireciona para a página de login
     }
     return Promise.reject(error);
   }

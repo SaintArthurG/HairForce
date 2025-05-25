@@ -26,13 +26,18 @@ const Login = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (!formData.email || !formData.senha) {
+        if (formData.email === null || formData.senha === null) {
             setError("Preencha todos os campos!");
             return;
         }
 
         if (!isValidEmail(formData.email)) {
             setError("Digite um e-mail válido!");
+            return;
+        }
+
+        if (formData.senha.length < 6) {
+            setError("A senha deve ter pelo menos 11 caracteres!");
             return;
         }
 

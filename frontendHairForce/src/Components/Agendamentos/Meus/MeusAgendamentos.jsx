@@ -18,7 +18,6 @@ const MeusAgendamentos = () => {
                 } else {
                     setError('Erro ao carregar os agendamentos.');
                 }
-                console.error('Erro ao carregar os agendamentos:', err);
             } finally {
                 setLoading(false);
             }
