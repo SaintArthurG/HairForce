@@ -6,7 +6,7 @@ const Home = () => {
         <div className="home-container">
             <header className="home-header">
                 <h1>Bem-vindo ao HairForce</h1>
-                <p>Oferecemos os melhores serviços para cuidar do seu estilo!</p>
+                <p className="home-subtitulo">Oferecemos os melhores serviços para cuidar do seu estilo!</p>
             </header>
             <section className="home-services">
                 <h2>Nossos Serviços</h2>
