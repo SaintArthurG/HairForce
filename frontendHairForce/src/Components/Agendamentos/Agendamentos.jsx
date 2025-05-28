@@ -1,32 +1,40 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import './Agendamentos.css';
 import apiJWT from "../../services/apiJWT";
 
 const Agendamentos = () => {
+    const navigate = useNavigate();
+
     const [barbeiroId, setBarbeiroId] = useState("");
     const [hora, setHora] = useState("");
     const [servicos, setServicos] = useState([]);
     const [barbeiros, setBarbeiros] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
-    
+
     const opcaoSemPreferencia = { id: null, nome: "Sem preferência" };
 
-
+    // 🔐 Verificar se o usuário está logado
     useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            navigate("/login");
+            return;
+        }
+
         const fetchBarbeiros = async () => {
             try {
                 const response = await axios.get("http://localhost:8080/barbeiros");
                 const barbeirosComOpcao = [opcaoSemPreferencia, ...response.data];
-                setBarbeiros(barbeirosComOpcao); 
-                        
+                setBarbeiros(barbeirosComOpcao);
             } catch (error) {
-                setErrorMessage("Erro ao buscar barbeiros")
+                setErrorMessage("Erro ao buscar barbeiros");
             }
         };
 
         fetchBarbeiros();
-    }, []);
+    }, [navigate]);
 
     const handleServiceChange = (event) => {
         const { value, checked } = event.target;
@@ -57,27 +65,25 @@ const Agendamentos = () => {
             hora,
             servico: servicosFormatados
         };
-        
 
         try {
             const response = await apiJWT.post("http://localhost:8080/agendamentos", requestBody);
 
             if (response.status === 201 || response.status === 200) {
-              alert("Agendamento realizado com sucesso!");
+                alert("Agendamento realizado com sucesso!");
                 setBarbeiroId("");
                 setHora("");
                 setServicos([]);
             }
-          } catch (error) {
+        } catch (error) {
             if (error.response) {
-              setErrorMessage(error.response.data);
-            } else if (error.request){
-              setErrorMessage("Erro ao se conectar com o servidor.");
+                setErrorMessage(error.response.data);
+            } else if (error.request) {
+                setErrorMessage("Erro ao se conectar com o servidor.");
             } else {
                 setErrorMessage(error.message);
             }
-          }
-          
+        }
     };
 
     return (
@@ -109,10 +115,10 @@ const Agendamentos = () => {
                     <select
                         id="barbeiro"
                         value={barbeiroId}
-                        onChange={(e) =>{
+                        onChange={(e) => {
                             setBarbeiroId(e.target.value);
                             setErrorMessage("");
-                        } }
+                        }}
                         required
                     >
                         <option value="" disabled>Selecione um barbeiro</option>
@@ -129,7 +135,10 @@ const Agendamentos = () => {
                     <select
                         id="horario"
                         value={hora}
-                        onChange={(e) => {setHora(e.target.value); setErrorMessage("");}}
+                        onChange={(e) => {
+                            setHora(e.target.value);
+                            setErrorMessage("");
+                        }}
                         required
                     >
                         <option value="" disabled>Selecione um horário</option>
