@@ -11,6 +11,8 @@
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
     padding: 0;
+    background-image: url(../../../assets/image.png);
+
   }
   
   .agendamento-container {
@@ -21,6 +23,7 @@
     border: 1px solid var(--preto);
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  
   }
   
   .titulo {
@@ -52,7 +55,7 @@
   }
   
   .item-agendamento {
-    background-color: #2d2d2d;
+    background-color: #2b2b2b;
     color: var(--branco);
     border-left: 5px solid var(--vermelho);
     padding: 1rem;

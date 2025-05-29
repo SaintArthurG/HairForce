@@ -1,10 +1,7 @@
 .container {
-  max-width: 500px;
-  margin: 40px auto;
-  padding: 32px;
+
   background-color: #1c1c1c; /* fundo escuro, mas não preto puro */
   border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(255, 0, 0, 0.1);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: all 0.3s ease-in-out;
   color: #f1f1f1;
@@ -85,12 +82,12 @@ legend {
 
 .form-group label {
   font-weight: 600;
-  color: #777; /* antes: #eee */
+  color: #777; 
   font-size: 1.05rem;
 }
 
 .checkbox-item label {
-  color: #ccc; /* antes: #ddd */
+  color: #ccc; 
 }
 
 

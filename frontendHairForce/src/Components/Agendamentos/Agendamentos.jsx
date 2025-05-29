@@ -88,9 +88,9 @@ const Agendamentos = () => {
 
     return (
         <div className="container">
+            <form onSubmit={handleSubmit}>
             <h1>Agende seu Serviço</h1>
             {errorMessage && <p className="error">{errorMessage}</p>}
-            <form onSubmit={handleSubmit}>
                 <fieldset>
                     <legend>Escolha os Serviços:</legend>
                     <div className="checkbox-group">
