@@ -11,8 +11,12 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #f4f7fc;
+  background-color: transparent; 
   font-family: 'Arial', sans-serif;
+  background-image: url(../../assets/image.png);
+  background-repeat: repeat; 
+  background-size: auto; 
+  
 }
 
 h1 {
@@ -23,13 +27,14 @@ h1 {
 }
 
 form {
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0); 
+  backdrop-filter: blur(10px); 
   padding: 30px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 400px;
-  box-sizing: border-box; 
+  box-sizing: border-box;
+ 
 }
 
 .input-container {
@@ -104,7 +109,7 @@ button:active {
 }
 
 .recall-forget a {
-  color: #4CAF50;
+  color: #e74c3c;
   text-decoration: none;
 }
 
@@ -115,11 +120,11 @@ button:active {
 .App {
   text-align: center;
   margin-top: 20px;
-  color: #777;
+  color: #443f3f;
 }
 
 .App a {
-  color: #4CAF50;
+  color: #e74c3c;
   text-decoration: none;
 }
 

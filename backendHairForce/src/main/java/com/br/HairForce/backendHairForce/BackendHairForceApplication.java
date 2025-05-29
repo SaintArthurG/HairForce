@@ -20,8 +20,7 @@ public class BackendHairForceApplication {
 		System.setProperty("JWT_SECRET", dotenv.get("JWT_SECRET"));
 
 		//MAIL
-		System.setProperty("MAIL_USERNAME", dotenv.get("MAIL_USERNAME"));
-		System.setProperty("MAIL_PASSWORD", dotenv.get("MAIL_PASSWORD"));
+
 
 		SpringApplication.run(BackendHairForceApplication.class, args);
 	}
