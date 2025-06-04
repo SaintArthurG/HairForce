@@ -52,9 +52,9 @@ public class AgendamentoService {
         return new DadosAgendamentoResponse(agendamento);
     }
 
-    public List<DadosAgendamentoResponse> listarTodosAgendamentos(){
+    public List<DadosAgendamentoResponseBarbeiro> listarTodosAgendamentos(){
         var agendamentos = agendamentoRepository.findAllByAtivoTrue();
-        return agendamentos.stream().map(DadosAgendamentoResponse::new).toList();
+        return agendamentos.stream().map(DadosAgendamentoResponseBarbeiro::new).toList();
     }
 
     public List<DadosAgendamentoResponse> listarAgendamentosPorUsuario(Long usuarioId){

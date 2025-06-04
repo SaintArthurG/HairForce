@@ -1,9 +1,6 @@
 package com.br.HairForce.backendHairForce.controller;
 
-import com.br.HairForce.backendHairForce.domain.agendamento.AgendamentoService;
-import com.br.HairForce.backendHairForce.domain.agendamento.DadosAgendamentoRequest;
-import com.br.HairForce.backendHairForce.domain.agendamento.DadosAgendamentoResponse;
-import com.br.HairForce.backendHairForce.domain.agendamento.DadosCancelamentoAgendamento;
+import com.br.HairForce.backendHairForce.domain.agendamento.*;
 import com.br.HairForce.backendHairForce.domain.usuario.Usuario;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -47,8 +44,10 @@ public class AgendamentoController {
 
     @GetMapping
     @PreAuthorize("hasRole('ROLE_PICA')")
-    public ResponseEntity<List<DadosAgendamentoResponse>> listarTodosAgendamentos(){
+    public ResponseEntity<List<DadosAgendamentoResponseBarbeiro>> listarTodosAgendamentos(){
         var response = agendamentoService.listarTodosAgendamentos();
         return ResponseEntity.ok().body(response);
     }
+
+
 }
