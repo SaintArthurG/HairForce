@@ -10,6 +10,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.time.LocalDateTime;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
@@ -39,7 +41,9 @@ class BarbeiroRepositoryTest {
         var barbeiro = new Barbeiro(dados);
         em.persist(barbeiro);
 
-        var barbeiroLivre = barbeiroRepository.encontrarBarbeiroLivre("11:00");
+        var agora = LocalDateTime.now();
+
+        var barbeiroLivre = barbeiroRepository.encontrarBarbeiroLivre(agora);
         assertThat(barbeiroLivre).isNotNull();
     }
 

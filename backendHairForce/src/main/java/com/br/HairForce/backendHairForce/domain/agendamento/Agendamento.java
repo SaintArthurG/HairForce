@@ -41,7 +41,7 @@ public class Agendamento {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    private String hora;
+    private LocalDateTime data;
 
     private Boolean ativo;
 
@@ -52,7 +52,7 @@ public class Agendamento {
     public Agendamento (DadosAgendamentoRequest dados, Barbeiro barbeiro, Usuario usuario){
         this.ativo = true;
         this.servico = dados.servico();
-        this.hora = dados.hora();
+        this.data = dados.data();
         this.barbeiro = barbeiro;
         this.usuario = usuario;
         this.motivoCancelamento = null;

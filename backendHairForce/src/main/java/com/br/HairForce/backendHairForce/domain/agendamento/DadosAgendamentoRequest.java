@@ -8,8 +8,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public record DadosAgendamentoRequest(
-        @NotBlank
-        String hora,
+        @NotNull
+        @Future
+        LocalDateTime data,
 
         @NotBlank
         List<Servico> servico,
