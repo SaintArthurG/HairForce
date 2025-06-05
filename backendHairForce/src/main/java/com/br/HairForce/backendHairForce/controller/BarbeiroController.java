@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -44,8 +45,6 @@ public class BarbeiroController {
     public ResponseEntity excluirBarbeiro(@PathVariable Long id){
         var barbeiro = repository.getReferenceById(id);
         barbeiro.excuirBarbeiro();
-
         return ResponseEntity.noContent().build();
-
     }
 }

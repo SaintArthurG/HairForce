@@ -40,7 +40,7 @@ public class AgendamentoService {
 
         var usuario = usuarioRepository.getReferenceById(usuarioId);
 
-        boolean existeConflito = agendamentoRepository.existsByBarbeiroAndData(barbeiro, dados.data());
+        boolean existeConflito = agendamentoRepository.existsByBarbeiroAndData(barbeiro, dados.dataHorario());
 
         if(existeConflito){
             throw new RuntimeException("Já existe agendamento para esse barbeiro nesse horario");
@@ -66,7 +66,7 @@ public class AgendamentoService {
         if(dados.barbeiroId() != null){
             return barbeiroRepository.getReferenceById(dados.barbeiroId());
         }
-        return barbeiroRepository.encontrarBarbeiroLivre(dados.data());
+        return barbeiroRepository.encontrarBarbeiroLivre(dados.dataHorario());
     }
 
     public void cancelar(DadosCancelamentoAgendamento dados){
@@ -76,5 +76,7 @@ public class AgendamentoService {
         var agendamento = agendamentoRepository.getReferenceById(dados.idAgendamento());
         agendamento.desativarAgendamento(dados.motivo());
     }
+
+
 
 }

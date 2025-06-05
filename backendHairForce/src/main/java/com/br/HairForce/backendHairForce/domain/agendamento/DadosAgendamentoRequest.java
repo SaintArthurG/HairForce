@@ -10,7 +10,7 @@ import java.util.List;
 public record DadosAgendamentoRequest(
         @NotNull
         @Future
-        LocalDateTime data,
+        LocalDateTime dataHorario,
 
         @NotBlank
         List<Servico> servico,

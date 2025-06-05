@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import './Agendamentos.css';
 import apiJWT from "../../services/apiJWT";
+import axios from "axios"
 
 const Agendamentos = () => {
     const navigate = useNavigate();
 
     const [barbeiroId, setBarbeiroId] = useState("");
-    const [hora, setHora] = useState("");
+    const [data, setData] = useState("");
+    const [horario, setHorario] = useState("");
     const [servicos, setServicos] = useState([]);
     const [barbeiros, setBarbeiros] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
@@ -29,6 +30,8 @@ const Agendamentos = () => {
                 const barbeirosComOpcao = [opcaoSemPreferencia, ...response.data];
                 setBarbeiros(barbeirosComOpcao);
             } catch (error) {
+                console.log(error);
+                
                 setErrorMessage("Erro ao buscar barbeiros");
             }
         };
@@ -47,10 +50,13 @@ const Agendamentos = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        if (!hora || servicos.length === 0) {
+        if (!data || !horario || servicos.length === 0 || !barbeiroId) {
             alert("Por favor, preencha todos os campos.");
             return;
         }
+
+        // Combinar data e horário
+        const dataHorario = `${data}T${horario}`;
 
         const serviceMap = {
             "Cortar Cabelo": "CORTAR_CABELO",
@@ -62,7 +68,7 @@ const Agendamentos = () => {
 
         const requestBody = {
             barbeiroId: barbeiroId === "null" ? null : parseInt(barbeiroId, 10),
-            hora,
+            dataHorario: dataHorario,
             servico: servicosFormatados
         };
 
@@ -72,7 +78,8 @@ const Agendamentos = () => {
             if (response.status === 201 || response.status === 200) {
                 alert("Agendamento realizado com sucesso!");
                 setBarbeiroId("");
-                setHora("");
+                setData("");
+                setHorario("");
                 setServicos([]);
             }
         } catch (error) {
@@ -131,12 +138,26 @@ const Agendamentos = () => {
                 </div>
 
                 <div className="form-group">
+                    <label htmlFor="data">Escolha a Data</label>
+                    <input
+                        type="date"
+                        id="data"
+                        value={data}
+                        onChange={(e) => {
+                            setData(e.target.value);
+                            setErrorMessage("");
+                        }}
+                        required
+                    />
+                </div>
+
+                <div className="form-group">
                     <label htmlFor="horario">Escolha o Horário</label>
                     <select
                         id="horario"
-                        value={hora}
+                        value={horario}
                         onChange={(e) => {
-                            setHora(e.target.value);
+                            setHorario(e.target.value);
                             setErrorMessage("");
                         }}
                         required

@@ -52,7 +52,7 @@ public class Agendamento {
     public Agendamento (DadosAgendamentoRequest dados, Barbeiro barbeiro, Usuario usuario){
         this.ativo = true;
         this.servico = dados.servico();
-        this.data = dados.data();
+        this.data = dados.dataHorario();
         this.barbeiro = barbeiro;
         this.usuario = usuario;
         this.motivoCancelamento = null;
