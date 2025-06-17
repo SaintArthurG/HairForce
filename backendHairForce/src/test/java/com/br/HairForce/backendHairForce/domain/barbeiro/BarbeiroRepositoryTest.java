@@ -1,5 +1,6 @@
 package com.br.HairForce.backendHairForce.domain.barbeiro;
 
+import com.br.HairForce.backendHairForce.domain.usuario.Usuario;
 import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeAll;

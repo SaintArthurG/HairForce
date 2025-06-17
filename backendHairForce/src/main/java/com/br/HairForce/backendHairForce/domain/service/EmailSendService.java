@@ -26,5 +26,9 @@ public class EmailSendService {
 
         mailSender.send(mimeMessage);
     }
+//    PRECISO VALIDAR O EMAIL ENVIANDO UM TOKEN, MAS DEPOIS EU FAÇO ISSO
+//    public void sendTokenNewEmail(String email, String token) throws MessagingException {
+//        String tokenEmailLink = "https://saintarthurg.github.io/hairforce/validar";
+//    }
 
 }

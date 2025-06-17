@@ -2,12 +2,9 @@ package com.br.HairForce.backendHairForce.domain.agendamento;
 
 import com.br.HairForce.backendHairForce.domain.barbeiro.Barbeiro;
 import com.br.HairForce.backendHairForce.domain.barbeiro.BarbeiroRepository;
-import com.br.HairForce.backendHairForce.domain.usuario.Usuario;
 import com.br.HairForce.backendHairForce.domain.usuario.UsuarioRepository;
 import com.br.HairForce.backendHairForce.exception.ValidacaoException;
-import com.br.HairForce.backendHairForce.infra.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,7 +43,7 @@ public class AgendamentoService {
             throw new RuntimeException("Já existe agendamento para esse barbeiro nesse horario");
         }
 
-        var agendamento = new Agendamento(dados, barbeiro, usuario);
+        var agendamento = new Agendamento(dados.dataHorario(), dados.servico(), barbeiro, usuario);
         agendamentoRepository.save(agendamento);
 
         return new DadosAgendamentoResponse(agendamento);

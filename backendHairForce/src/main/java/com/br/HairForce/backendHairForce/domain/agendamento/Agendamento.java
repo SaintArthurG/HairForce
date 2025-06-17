@@ -49,10 +49,10 @@ public class Agendamento {
     @Enumerated(EnumType.STRING)
     private MotivoCancelamento motivoCancelamento;
 
-    public Agendamento (DadosAgendamentoRequest dados, Barbeiro barbeiro, Usuario usuario){
+    public Agendamento (LocalDateTime data, List<Servico> servico, Barbeiro barbeiro, Usuario usuario){
         this.ativo = true;
-        this.servico = dados.servico();
-        this.data = dados.dataHorario();
+        this.servico = servico;
+        this.data = data;
         this.barbeiro = barbeiro;
         this.usuario = usuario;
         this.motivoCancelamento = null;

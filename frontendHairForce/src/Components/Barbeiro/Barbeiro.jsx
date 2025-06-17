@@ -62,8 +62,9 @@ const Barbeiro = () => {
                 <ul className="lista-agendamentos">
                     {agendamentos.map((agendamento) => (
                         <li key={agendamento.id} className="item-agendamento">
-                            <p><strong>Horário:</strong> {agendamento.hora}</p>
-                            <p><strong>Serviços:</strong> {agendamento.servicos.join(', ')}</p>
+                            <p><strong>Data:</strong> {agendamento.data.slice(0,10)}</p>
+                            <p><strong>Hora:</strong> {agendamento.data.slice(11,16)}</p>
+                            <p><strong>Serviços:</strong> {agendamento.servicos.join(', ').replace("_", " ")}</p>
                             <p><strong>Barbeiro:</strong> {agendamento.nomeBarbeiro}</p>
                             <p><strong>Cliente:</strong> {agendamento.nomeUsuario}</p>
                         </li>
