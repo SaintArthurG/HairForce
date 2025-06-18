@@ -21,6 +21,15 @@ public class AgendamentoService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    public AgendamentoService(
+            AgendamentoRepository agendamentoRepository,
+            BarbeiroRepository barbeiroRepository,
+            UsuarioRepository usuarioRepository) {
+        this.agendamentoRepository = agendamentoRepository;
+        this.barbeiroRepository = barbeiroRepository;
+        this.usuarioRepository = usuarioRepository;
+    }
+
 
     public DadosAgendamentoResponse criarAgendamento(DadosAgendamentoRequest dados, Long usuarioId){
 
