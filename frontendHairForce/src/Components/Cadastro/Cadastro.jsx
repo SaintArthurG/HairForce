@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Cadastro.css"
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Cadastro = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,8 @@ const Cadastro = () => {
     senha: "",
     confirmarSenha: ""
   });
+
+  const navigate = useNavigate();
 
   const [error, setError] = useState("");
   
