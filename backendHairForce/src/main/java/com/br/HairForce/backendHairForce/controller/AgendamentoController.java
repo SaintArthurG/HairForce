@@ -5,12 +5,14 @@ import com.br.HairForce.backendHairForce.domain.usuario.Usuario;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -42,12 +44,33 @@ public class AgendamentoController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
+//    @GetMapping
+//    @PreAuthorize("hasRole('ROLE_PICA')")
+//    public ResponseEntity<List<DadosAgendamentoResponseBarbeiro>> listarTodosAgendamentos(){
+//        var response = agendamentoService.listarTodosAgendamentos();
+//        return ResponseEntity.ok().body(response);
+//    }
+
+//    @GetMapping("/{barbeiroId}")
+//    @PreAuthorize("hasRole('ROLE_PICA')")
+//    public ResponseEntity<List<DadosAgendamentoResponseBarbeiro>> listarPorBarbeiro(@PathVariable Long barbeiroId){
+//        var response = agendamentoService.listarAgendamentosPorBarbeiro(barbeiroId);
+//        return ResponseEntity.ok().body(response);
+//    }
+
+    @GetMapping()
     @PreAuthorize("hasRole('ROLE_PICA')")
-    public ResponseEntity<List<DadosAgendamentoResponseBarbeiro>> listarTodosAgendamentos(){
-        var response = agendamentoService.listarTodosAgendamentos();
-        return ResponseEntity.ok().body(response);
+    public ResponseEntity<List<DadosAgendamentoResponseBarbeiro>> listarComFiltros(
+            @RequestParam(required = false) Long barbeiroId,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim,
+            @RequestParam(required = false) Boolean ativo
+    ) {
+        List<DadosAgendamentoResponseBarbeiro> agendamentos = agendamentoService.buscarComFiltros(barbeiroId, dataInicio, dataFim, ativo);
+        return ResponseEntity.ok(agendamentos);
     }
+
+
 
 
 }

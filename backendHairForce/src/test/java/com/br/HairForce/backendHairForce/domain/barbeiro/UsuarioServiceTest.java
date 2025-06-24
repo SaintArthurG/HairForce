@@ -15,6 +15,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.Optional;
+
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -46,22 +48,10 @@ public class UsuarioServiceTest {
     }
 
     @Test
-    void deveRetornarUsuarioPorEmail() {
-        Usuario usuario = new Usuario("João", "joao@email.com", "senha", null);
-
-        when(usuarioRepository.findByEmail("joao@email.com")).thenReturn(usuario);
-
-        Usuario resultado = usuarioService.findByEmail("joao@email.com");
-
-        assertNotNull(resultado);
-        assertEquals("João", resultado.getNome());
-    }
-
-    @Test
     void deveEnviarEmailComTokenQuandoSolicitarResetDeSenha() throws Exception {
         Usuario usuario = new Usuario("Maria", "maria@email.com", "senha", null);
 
-        when(usuarioRepository.findByEmail("maria@email.com")).thenReturn(usuario);
+        when(usuarioRepository.findByEmail("maria@email.com")).thenReturn(Optional.of(usuario));
         when(tokenService.gerarToken(usuario)).thenReturn("token123");
 
         String resposta = usuarioService.forgotPassword("maria@email.com");
@@ -74,7 +64,7 @@ public class UsuarioServiceTest {
     void deveLancarExcecaoSeFalharAoEnviarEmailReset() throws Exception {
         Usuario usuario = new Usuario("Lucas", "lucas@email.com", "senha", null);
 
-        when(usuarioRepository.findByEmail("lucas@email.com")).thenReturn(usuario);
+        when(usuarioRepository.findByEmail("lucas@email.com")).thenReturn(Optional.of(usuario));
         when(tokenService.gerarToken(usuario)).thenReturn("token123");
         doThrow(new MessagingException("Erro")).when(emailSendService).sendSetPasswordEmail(anyString(), anyString());
 
@@ -90,7 +80,7 @@ public class UsuarioServiceTest {
         Usuario usuario = new Usuario("Carlos", "carlos@email.com", "senha_antiga", null);
 
         when(tokenService.getSubject("tokenValido")).thenReturn("carlos@email.com");
-        when(usuarioRepository.findByEmail("carlos@email.com")).thenReturn(usuario);
+        when(usuarioRepository.findByEmail("carlos@email.com")).thenReturn(Optional.of(usuario));
         when(encoder.encode("novaSenha")).thenReturn("novaSenhaCriptografada");
 
         String resposta = usuarioService.setNewPassword("tokenValido", "novaSenha");

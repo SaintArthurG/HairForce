@@ -5,9 +5,14 @@ import com.br.HairForce.backendHairForce.domain.barbeiro.BarbeiroRepository;
 import com.br.HairForce.backendHairForce.domain.usuario.UsuarioRepository;
 import com.br.HairForce.backendHairForce.exception.ValidacaoException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+
+import static com.br.HairForce.backendHairForce.domain.agendamento.AgendamentoSpecifications.*;
+
 
 @Service
 public class AgendamentoService {
@@ -67,6 +72,26 @@ public class AgendamentoService {
         var agendamentos = agendamentoRepository.findByUsuarioIdAndAtivoTrue(usuarioId);
         return agendamentos.stream().map(DadosAgendamentoResponse::new).toList();
     }
+
+//    public List<DadosAgendamentoResponseBarbeiro> listarAgendamentosPorBarbeiro(Long barbeiroId){
+//        var agendamentos = agendamentoRepository.findByBarbeiroIdAndAgendamentoAtivoTrue(barbeiroId);
+//        return agendamentos.stream().map(DadosAgendamentoResponseBarbeiro::new).toList();
+//    }
+
+    public List<DadosAgendamentoResponseBarbeiro> buscarComFiltros(Long barbeiroId, LocalDate dataInicio, LocalDate dataFim, Boolean ativo) {
+        Specification<Agendamento> spec = Specification
+                .where(barbeiroIdEquals(barbeiroId))
+                .and(dataBetween(dataInicio, dataFim))
+                .and(ativoEquals(ativo));
+
+        return agendamentoRepository.findAll(spec)
+                .stream()
+                .map(DadosAgendamentoResponseBarbeiro::new)
+                .toList();
+    }
+
+
+
 
     private Barbeiro escolherBarbeiro(DadosAgendamentoRequest dados){
         if(dados.barbeiroId() != null){

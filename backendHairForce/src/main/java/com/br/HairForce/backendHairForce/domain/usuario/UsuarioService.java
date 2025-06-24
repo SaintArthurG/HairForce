@@ -30,13 +30,9 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public Usuario findByEmail(String email){
-        var usuario = usuarioRepository.findByEmail(email);
-        return (Usuario) usuario;
-    }
-
     public String forgotPassword(String email) {
-        var usuario = usuarioRepository.findByEmail(email);
+        var usuario = getUsuarioByEmail(email);
+
         var tokenReset = tokenService.gerarToken((Usuario) usuario);
         try {
             emailSendService.sendSetPasswordEmail(email, tokenReset);
@@ -49,16 +45,18 @@ public class UsuarioService {
 
     public String setNewPassword(String token, String novaSenha) {
         var emailUsuario = tokenService.getSubject(token);
-        UserDetails userDetails = usuarioRepository.findByEmail(emailUsuario);
 
-        if(!(userDetails instanceof Usuario usuario)){
-            throw new IllegalStateException("Usuario invalido");
-        }
+        var usuario = getUsuarioByEmail(emailUsuario);
 
         String senhaCriptografada = encoder.encode(novaSenha);
         usuario.atualizarSenha(senhaCriptografada);
         usuarioRepository.save(usuario);
 
         return "Nova senha alterada com sucesso";
+    }
+
+    private Usuario getUsuarioByEmail(String email){
+        return usuarioRepository.findByEmail(email)
+                .orElseThrow(()-> new IllegalStateException("Usuário invalido"));
     }
 }

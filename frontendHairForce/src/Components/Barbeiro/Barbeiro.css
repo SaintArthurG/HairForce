@@ -3,3 +3,25 @@
 #divcenter{
     text-align: center;
 }
+
+input[type="date"] {
+  padding: 8px 12px;
+  border: 2px solid #007bff;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f0f8ff;
+  width: 200px;
+}
+
+/* Placeholder (não funciona em date em todos os browsers) */
+input[type="date"]::placeholder {
+  color: #999;
+}
+
+/* Foco */
+input[type="date"]:focus {
+  border-color: #0056b3;
+  outline: none;
+  box-shadow: 0 0 5px #0056b3;
+}
