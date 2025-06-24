@@ -73,11 +73,6 @@ public class AgendamentoService {
         return agendamentos.stream().map(DadosAgendamentoResponse::new).toList();
     }
 
-//    public List<DadosAgendamentoResponseBarbeiro> listarAgendamentosPorBarbeiro(Long barbeiroId){
-//        var agendamentos = agendamentoRepository.findByBarbeiroIdAndAgendamentoAtivoTrue(barbeiroId);
-//        return agendamentos.stream().map(DadosAgendamentoResponseBarbeiro::new).toList();
-//    }
-
     public List<DadosAgendamentoResponseBarbeiro> buscarComFiltros(Long barbeiroId, LocalDate dataInicio, LocalDate dataFim, Boolean ativo) {
         Specification<Agendamento> spec = Specification
                 .where(barbeiroIdEquals(barbeiroId))
@@ -89,9 +84,6 @@ public class AgendamentoService {
                 .map(DadosAgendamentoResponseBarbeiro::new)
                 .toList();
     }
-
-
-
 
     private Barbeiro escolherBarbeiro(DadosAgendamentoRequest dados){
         if(dados.barbeiroId() != null){

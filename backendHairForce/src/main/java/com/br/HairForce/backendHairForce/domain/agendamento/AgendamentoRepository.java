@@ -15,9 +15,4 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Long>,
     List<Agendamento> findAllByAtivoTrue();
 
     List<Agendamento> findByUsuarioIdAndAtivoTrue(Long usuarioId);
-
-
-//    @Query("SELECT a FROM Agendamento a WHERE a.barbeiro.id = :barbeiroId")
-//    List<Agendamento> findByBarbeiroIdAndAgendamentoAtivoTrue(Long barbeiroId);
-
 }

@@ -44,20 +44,6 @@ public class AgendamentoController {
         return ResponseEntity.noContent().build();
     }
 
-//    @GetMapping
-//    @PreAuthorize("hasRole('ROLE_PICA')")
-//    public ResponseEntity<List<DadosAgendamentoResponseBarbeiro>> listarTodosAgendamentos(){
-//        var response = agendamentoService.listarTodosAgendamentos();
-//        return ResponseEntity.ok().body(response);
-//    }
-
-//    @GetMapping("/{barbeiroId}")
-//    @PreAuthorize("hasRole('ROLE_PICA')")
-//    public ResponseEntity<List<DadosAgendamentoResponseBarbeiro>> listarPorBarbeiro(@PathVariable Long barbeiroId){
-//        var response = agendamentoService.listarAgendamentosPorBarbeiro(barbeiroId);
-//        return ResponseEntity.ok().body(response);
-//    }
-
     @GetMapping()
     @PreAuthorize("hasRole('ROLE_PICA')")
     public ResponseEntity<List<DadosAgendamentoResponseBarbeiro>> listarComFiltros(
